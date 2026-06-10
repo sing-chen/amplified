@@ -161,7 +161,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
   }
 
   /* ── HERO ───────────────────────────────────── */
@@ -1087,15 +1087,22 @@
   ::-webkit-scrollbar-thumb:hover { background: rgba(45,117,111,0.5); }
 
   /* ── ALTERNATING SECTION BACKGROUNDS ───────── */
-  .section-odd  { background: var(--off-white); }
-  .section-even {
-    background: var(--cream);
-    /* Extend cream to full width by compensating for content padding */
-    margin-left: -80px;
-    margin-right: -80px;
-    padding-left: 80px;
-    padding-right: 80px;
+  /* Full-bleed: backgrounds span .main's full width (viewport minus nav rail),
+     while content stays in its existing 780px column flush against the nav
+     rail (left inset is a constant 80px from .content's padding; right inset
+     grows with viewport width since the column doesn't re-centre). */
+  .section { position: relative; z-index: 0; }
+  .section-odd::before,
+  .section-even::before {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    left: -80px;
+    right: min(-80px, calc(1120px - 100vw));
+    z-index: -1;
   }
+  .section-odd::before  { background: var(--off-white); }
+  .section-even::before { background: var(--cream); }
   /* On cream sections, white-background cards stay white for clear contrast */
   .section-even .model-card,
   .section-even .mistake,
@@ -1181,7 +1188,12 @@
   <div class="hero">    
     <div class="hero-accent"></div>
     <h1>Analytical Thinking</h1>
-    <p class="hero-sub">The full learning plan. Work through it sequentially or use the navigation to jump to what you need.</p>    
+    <p class="hero-sub">The full learning plan. Work through it sequentially or use the navigation to jump to what you need.</p>
+    <div class="hero-tags">
+      <span class="tag tag-analytical">Thinking Skills</span>
+      <span class="tag tag-structural">Full Learning Plan</span>
+      <span class="tag tag-growth">Self-Paced</span>      
+    </div>
   </div>
 
   <div class="content">
