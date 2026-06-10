@@ -4,46 +4,46 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Future Skills Library · Amplified</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
-  :root{--deep-teal:#1B4A44;--mid-teal:#2D756F;--teal:#3A8F88;--sage:#ACC4B6;--light-sage:#D8E6E2;--off-white:#F7F5F2;--charcoal:#1E2A26;--warm-gray:#8B8A85;--terracotta:#C77B5F;--text-dark:#1C2B26;--text-mid:#3D5248;--text-muted:#4A5C55;--white:#FFFFFF;--page-max:1100px;--radius:6px;--radius-lg:10px;--radius-xl:14px}
+  :root{--deep-teal:#2D756F;--mid-teal:#2D756F;--teal:#5BA79F;--sage:#ACC4B6;--light-sage:#D8E4DD;--off-white:#F5F7F6;--charcoal:#2D3330;--navy:#1F4D4A;--warm-gray:#8B8A85;--terracotta:#C77B5F;--text-dark:#1F4D4A;--text-mid:#1F4D4A;--text-muted:#4A5C55;--white:#FFFFFF;--page-max:1100px;--radius:6px;--radius-lg:10px;--radius-xl:14px}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-  body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text-dark);background:var(--off-white);font-size:16px;line-height:1.65}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--text-dark);background:var(--off-white);font-size:16px;line-height:1.65}
   .skip-link{position:absolute;top:-44px;left:0;background:var(--mid-teal);color:var(--white);font-size:14px;font-weight:600;padding:10px 18px;z-index:9999;text-decoration:none;border-radius:0 0 var(--radius) 0;transition:top .15s}
   .skip-link:focus{top:0}
   :focus-visible{outline:2px solid var(--mid-teal);outline-offset:3px;border-radius:3px}
   .lcard:focus-visible{outline:2px solid var(--mid-teal);outline-offset:4px;border-radius:var(--radius-lg)}
 
   /* ── HERO ── */
-  .hero{background:var(--deep-teal);padding:80px 40px 72px;position:relative;overflow:hidden}
+  .hero{background:#1B4A44;padding:80px 40px 72px;position:relative;overflow:hidden}
   .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 800px 600px at 80% 60%,rgba(91,167,159,.07) 0%,transparent 70%);pointer-events:none}
   .hi{max-width:var(--page-max);margin:0 auto}
-  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);margin-bottom:14px}
-  .hero-hl{font-family:'Lora',Georgia,serif;font-size:clamp(32px,3.8vw,48px);font-weight:600;color:var(--white);line-height:1.15;letter-spacing:-.02em;margin-bottom:20px;max-width:900px}
-  .hero-hl em{color:var(--sage);font-style:italic;font-weight:400}
-  .hero-body{font-size:16px;line-height:1.75;color:rgba(255,255,255,.84);max-width:900px}
+  .eyebrow{font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);margin-bottom:14px}
+  .hero-hl{font-family:'Poppins',sans-serif;font-size:clamp(28px,3.4vw,44px);font-weight:700;color:var(--white);line-height:1.15;letter-spacing:-.01em;margin-bottom:20px;max-width:860px}
+  .hero-hl em{color:var(--sage);font-style:normal;font-weight:400}
+  .hero-body{font-family:'Inter',sans-serif;font-size:16px;line-height:1.75;color:rgba(255,255,255,.84);max-width:860px}
 
   /* ── INTRO ── */
   .intro{padding:56px 40px 48px;max-width:var(--page-max);margin:0 auto}
   .intro-grid{display:grid;grid-template-columns:1fr 300px;gap:64px;align-items:start}
-  .ib{font-size:15.5px;line-height:1.8;color:var(--text-mid)}
+  .ib{font-family:'Inter',sans-serif;font-size:15.5px;line-height:1.8;color:var(--navy)}
   .ib p+p{margin-top:16px}
   .ib strong{color:var(--text-dark);font-weight:500}
   .ia{background:var(--light-sage);border-radius:var(--radius-xl);padding:26px}
-  .ia-title{font-family:'Lora',Georgia,serif;font-size:14px;font-weight:600;color:var(--deep-teal);margin-bottom:14px}
+  .ia-title{font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--deep-teal);margin-bottom:14px}
   .how-list{list-style:none;display:flex;flex-direction:column;gap:14px}
   .how-item{display:flex;gap:12px;align-items:flex-start}
-  .how-dot{width:8px;height:8px;border-radius:50%;background:var(--mid-teal);flex-shrink:0;margin-top:7px}
-  .how-label{font-size:13.5px;font-weight:600;color:var(--deep-teal);line-height:1.3}
-  .how-sub{font-size:12px;color:var(--mid-teal);margin-top:2px;line-height:1.45}
+  .how-dot{width:8px;height:8px;border-radius:50%;background:var(--mid-teal);flex-shrink:0;margin-top:6px}
+  .how-label{font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;color:var(--deep-teal);line-height:1.3}
+  .how-sub{font-family:'Inter',sans-serif;font-size:12px;color:var(--mid-teal);margin-top:2px;line-height:1.45}
 
   /* ── LIBRARY ── */
   .divider{height:1px;background:rgba(172,196,182,.2);margin:0 40px}
   .library{padding:52px 40px 80px;max-width:var(--page-max);margin:0 auto}
   .lib-hdr{margin-bottom:36px}
-  .section-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mid-teal);margin-bottom:8px}
-  .stitle{font-family:'Lora',Georgia,serif;font-size:clamp(22px,2.6vw,28px);font-weight:600;color:var(--text-dark);line-height:1.2;letter-spacing:-.015em}
+  .section-label{font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mid-teal);margin-bottom:8px}
+  .stitle{font-family:'Poppins',sans-serif;font-size:clamp(20px,2.4vw,26px);font-weight:700;color:var(--text-dark);line-height:1.2;letter-spacing:-.01em}
 
   /* ── SKILL CARDS ── */
   .skill-list{display:flex;flex-direction:column;gap:16px}
@@ -62,27 +62,23 @@
   .shc{flex:1;display:flex;align-items:center;gap:16px;padding:18px 22px;flex-wrap:wrap}
   .stb{flex:1;min-width:180px;display:flex;flex-direction:column;gap:5px}
   .skill-pills{display:flex;flex-wrap:wrap;gap:5px}
-  .skill-pill{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:var(--light-sage);color:var(--mid-teal)}
-  /* Category-specific pill colors — mapped to brand palette tag system */
+  .skill-pill{font-family:'Poppins',sans-serif;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:var(--light-sage);color:var(--mid-teal)}
   .skill-pill.sp-cognitive   {background:#C5DDD9;color:#2D756F}
   .skill-pill.sp-self-efficacy{background:#EDD5CB;color:#1F4D4A}
   .skill-pill.sp-engagement  {background:#F2DDB8;color:#2D3330}
   .skill-pill.sp-technology  {background:#D8E4DD;color:#1F4D4A}
   .skill-pill.sp-management  {background:#C8D4DC;color:#2D3330}
-  /* Coming-soon cards: desaturate all pill variants */
   .scard.cs .skill-pill,
   .scard.cs .skill-pill.sp-cognitive,
   .scard.cs .skill-pill.sp-self-efficacy,
   .scard.cs .skill-pill.sp-engagement,
   .scard.cs .skill-pill.sp-technology,
   .scard.cs .skill-pill.sp-management{background:rgba(139,138,133,.1);color:var(--warm-gray)}
-  .sname{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:600;color:var(--text-dark);line-height:1.2}
-  
+  .sname{font-family:'Poppins',sans-serif;font-size:16px;font-weight:600;color:var(--text-dark);line-height:1.2}
   .scard.cs .sname{color:var(--text-muted)}
-  
-  .ssum{font-size:13.5px;line-height:1.55;color:var(--text-muted);max-width:400px;flex:2}
+  .ssum{font-family:'Inter',sans-serif;font-size:13.5px;line-height:1.55;color:var(--text-muted);max-width:400px;flex:2}
   .scard.cs .ssum{color:rgba(139,138,133,.7)}
-  .sstatus{font-size:11px;font-weight:600;padding:4px 11px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+  .sstatus{font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;padding:4px 11px;border-radius:20px;white-space:nowrap;flex-shrink:0}
   .ss-avail{background:rgba(45,117,111,.12);color:var(--mid-teal)}
   .ss-soon{background:rgba(139,138,133,.1);color:var(--warm-gray)}
   .stoggle{display:flex;align-items:center;padding:0 18px;color:var(--text-muted);transition:transform .2s;flex-shrink:0}
@@ -93,37 +89,36 @@
   .sbody{display:none;border-top:1px solid rgba(172,196,182,.2);padding:28px 28px 28px 28px;gap:40px;align-items:flex-start}
   .scard.open .sbody{display:flex;flex-wrap:wrap}
   .sdef{flex:1;min-width:280px}
-  .sdl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid-teal);margin-bottom:10px}
-  .sdtext{font-family:'Lora',Georgia,serif;font-size:16px;line-height:1.7;color:var(--text-dark);font-style:italic;border-left:3px solid var(--sage);padding-left:18px;margin-bottom:20px}
-  .swhat{font-size:14px;line-height:1.75;color:var(--text-mid)}
+  .sdl{font-family:'Poppins',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid-teal);margin-bottom:10px}
+  .sdtext{font-family:'Inter',sans-serif;font-size:15px;font-style:italic;line-height:1.7;color:var(--text-dark);border-left:3px solid var(--sage);padding-left:18px;margin-bottom:20px}
+  .swhat{font-family:'Inter',sans-serif;font-size:14px;line-height:1.75;color:var(--navy)}
   .swhat p+p{margin-top:12px}
   .slaunch{width:252px;flex-shrink:0}
-  .ltitle{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid-teal);margin-bottom:12px}
+  .ltitle{font-family:'Poppins',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid-teal);margin-bottom:12px}
   .lcards{display:flex;flex-direction:column;gap:10px}
   .lcard{background:var(--off-white);border:1px solid rgba(172,196,182,.3);border-radius:var(--radius-lg);padding:14px 16px;text-decoration:none;display:block;transition:border-color .15s,background .15s,transform .1s}
   .lcard:hover{border-color:rgba(45,117,111,.45);background:var(--white);transform:translateY(-1px)}
   .lcard.primary{background:var(--deep-teal);border-color:transparent}
-  .lcard.primary:hover{background:var(--mid-teal)}
-  .lctype{font-size:14px;font-weight:600;letter-spacing:.01em;text-transform:none;color:var(--text-dark);margin-bottom:4px;line-height:1.3}
+  .lcard.primary:hover{background:var(--teal)}
+  .lctype{font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;color:var(--text-dark);margin-bottom:4px;line-height:1.3}
   .lcard.primary .lctype{color:var(--white)}
-  .lcdesc{font-size:12px;color:var(--text-muted);line-height:1.5}
+  .lcdesc{font-family:'Inter',sans-serif;font-size:12px;color:var(--text-muted);line-height:1.5}
   .lcard.primary .lcdesc{color:rgba(255,255,255,.75)}
-  .lccta{font-size:11.5px;font-weight:600;color:var(--mid-teal);margin-top:6px;display:flex;align-items:center;gap:4px}
+  .lccta{font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;color:var(--mid-teal);margin-top:6px;display:flex;align-items:center;gap:4px}
   .lcard.primary .lccta{color:var(--sage)}
-
 
   /* ── FILTER TABS ── */
   .filter-bar{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
-  .ftab{font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px;border:1px solid rgba(172,196,182,.3);color:var(--text-muted);background:transparent;cursor:pointer;transition:background .15s,color .15s,border-color .15s;white-space:nowrap;font-family:'DM Sans',system-ui,sans-serif}
+  .ftab{font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px;border:1px solid rgba(172,196,182,.3);color:var(--text-muted);background:transparent;cursor:pointer;transition:background .15s,color .15s,border-color .15s;white-space:nowrap}
   .ftab:hover{background:var(--light-sage);border-color:rgba(45,117,111,.3);color:var(--mid-teal)}
   .ftab.active{background:var(--mid-teal);border-color:transparent;color:var(--white)}
   .scard.hidden{display:none}
-  .filter-empty{display:none;padding:32px 0;font-size:14px;color:var(--text-muted)}
+  .filter-empty{display:none;padding:32px 0;font-family:'Inter',sans-serif;font-size:14px;color:var(--text-muted)}
   .filter-empty.visible{display:block}
 
   footer{background:var(--charcoal);padding:24px 40px;border-top:1px solid rgba(255,255,255,.06)}
   .fi{max-width:var(--page-max);margin:0 auto}
-  .fn{font-size:12px;color:rgba(255,255,255,.35)}
+  .fn{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,.35)}
 
   @media(max-width:900px){.intro-grid{grid-template-columns:1fr;gap:32px}.slaunch{width:100%}}
   @media(max-width:640px){
@@ -221,7 +216,6 @@
           <div class="stb">
             <div class="skill-pills"><span class="skill-pill sp-cognitive">Cognitive</span></div>
             <div class="sname">Analytical Thinking</div>
-            
           </div>
           <div class="ssum">Break complex problems into their components before drawing conclusions. <em>"What's actually happening here?"</em></div>
           <div class="sstatus ss-avail">Available Now</div>
@@ -387,14 +381,10 @@
 </footer>
 
 <script>
-
 function filterSkills(filter) {
-  // Update active tab
   document.querySelectorAll('.ftab').forEach(function(tab) {
     tab.classList.toggle('active', tab.dataset.filter === filter);
   });
-
-  // Show/hide cards
   var cards = document.querySelectorAll('.scard');
   var visible = 0;
   cards.forEach(function(card) {
@@ -403,13 +393,10 @@ function filterSkills(filter) {
     card.classList.toggle('hidden', !show);
     if (show) visible++;
   });
-
-  // Empty state
   var empty = document.getElementById('filter-empty');
   if (empty) empty.classList.toggle('visible', visible === 0);
 }
 
-// Wire up tabs
 document.querySelectorAll('.ftab').forEach(function(tab) {
   tab.addEventListener('click', function() {
     filterSkills(this.dataset.filter);
