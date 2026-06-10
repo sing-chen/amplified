@@ -159,6 +159,9 @@
     margin-left: var(--nav-width);
     flex: 1;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   /* ── HERO ───────────────────────────────────── */
@@ -168,6 +171,7 @@
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid rgba(45,117,111,0.12);
+    width: 100%;
   }
   .hero::before {
     content: '';
@@ -233,7 +237,7 @@
   .tag-insight     { background: var(--tag-insight-bg);    color: var(--tag-insight-tx); }
 
   /* ── CONTENT SECTIONS ───────────────────────── */
-  .content { max-width: calc(var(--content-max) + 160px); padding: 0 80px 120px; }
+  .content { max-width: calc(var(--content-max) + 160px); padding: 0 80px 120px; width: 100%; }
 
   .section {
     padding-top: 72px;
