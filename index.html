@@ -44,6 +44,9 @@
   .sb-stat:hover .sb-label{color:rgba(255,255,255,1)}
   .sb-source{font-family:'Poppins',sans-serif;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.50);margin-top:2px;transition:color .2s ease}
   .sb-stat:hover .sb-source{color:rgba(255,255,255,.75)}
+  .sb-source a{color:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+  .sb-source a:hover{border-bottom-color:rgba(255,255,255,.40)}
+  .sb-source a:focus-visible{outline:2px solid var(--sage);outline-offset:2px;border-radius:2px}
 
   /* ── WHY THIS EXISTS ── */
   .why{padding:72px 40px;max-width:var(--page-max);margin:0 auto}
@@ -60,13 +63,23 @@
   .wc-title{font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;color:var(--text-dark);margin-bottom:3px;line-height:1.3}
   .wc-body{font-family:'Inter',sans-serif;font-size:13px;color:var(--text-muted);line-height:1.55}
 
+  /* ── CITATIONS ── */
+  .citations{border-top:1px solid rgba(172,196,182,.30);padding:32px 40px 36px;background:var(--light-sage)}
+  .citations-inner{max-width:var(--page-max);margin:0 auto}
+  .citations ol{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:6px;counter-reset:cite}
+  .citations li{counter-increment:cite;display:flex;gap:10px;font-family:'Inter',sans-serif;font-size:12px;line-height:1.6;color:var(--text-muted)}
+  .citations li::before{content:counter(cite)'.';font-family:'Poppins',sans-serif;font-size:10px;font-weight:600;color:var(--teal);min-width:14px;padding-top:1px;flex-shrink:0}
+  .citations a{color:var(--navy);text-decoration:none;border-bottom:1px solid rgba(31,77,74,.25);transition:border-color .15s,color .15s}
+  .citations a:hover{color:var(--deep-teal);border-bottom-color:var(--deep-teal)}
+  .citations a:focus-visible{outline:2px solid var(--mid-teal);outline-offset:2px;border-radius:2px}
+
   footer{background:var(--charcoal);padding:24px 40px;border-top:1px solid rgba(255,255,255,.06)}
   .fi{max-width:var(--page-max);margin:0 auto}
   .fn{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,.35)}
 
   @media(max-width:900px){.why-grid{grid-template-columns:1fr;gap:36px}}
   @media(max-width:640px){
-    .hero,.why{padding-left:20px;padding-right:20px}
+    .hero,.why,.citations{padding-left:20px;padding-right:20px}
     .signal-bar{padding-left:20px;padding-right:20px}
     .sb-stat{min-width:150px}
     footer{padding:16px 20px}
@@ -93,27 +106,27 @@
     <div class="sb-stat">
       <div class="sb-num">39%</div>
       <div class="sb-label">of core job skills expected to change by 2030</div>
-      <div class="sb-source">WEF Future of Jobs 2025</div>
+      <div class="sb-source"><a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener noreferrer">WEF Future of Jobs 2025</a></div>
     </div>
     <div class="sb-stat">
       <div class="sb-num">59/100</div>
       <div class="sb-label">workers will need reskilling within five years</div>
-      <div class="sb-source">WEF Future of Jobs 2025</div>
+      <div class="sb-source"><a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener noreferrer">WEF Future of Jobs 2025</a></div>
     </div>
     <div class="sb-stat">
       <div class="sb-num">80%</div>
       <div class="sb-label">of the global workforce say they lack enough time or energy to do their work</div>
-      <div class="sb-source">Microsoft Work Trend Index 2025</div>
+      <div class="sb-source"><a href="https://www.microsoft.com/en-us/worklab/work-trend-index" target="_blank" rel="noopener noreferrer">Microsoft Work Trend Index 2025</a></div>
     </div>
     <div class="sb-stat">
       <div class="sb-num">+37%</div>
       <div class="sb-label">growth in critical thinking learning on Udemy year-over-year</div>
-      <div class="sb-source">Udemy Global Learning & Skills Trends 2026</div>
+      <div class="sb-source"><a href="https://business.udemy.com/resources/global-learning-skills-trends-report/" target="_blank" rel="noopener noreferrer">Udemy Global Learning & Skills Trends 2026</a></div>
     </div>
     <div class="sb-stat">
       <div class="sb-num">76%</div>
       <div class="sb-label">of employees use AI at work — up from 30% in 2023</div>
-      <div class="sb-source">Udemy Global Learning & Skills Trends 2026</div>
+      <div class="sb-source"><a href="https://business.udemy.com/resources/global-learning-skills-trends-report/" target="_blank" rel="noopener noreferrer">Udemy Global Learning & Skills Trends 2026</a></div>
     </div>
   </div>
 </div>
@@ -125,7 +138,7 @@
       <h2 class="why-hl">The cognitive apprenticeship is quietly disappearing</h2>
       <div class="why-body">
         <p>Entry-level tasks — synthesising research, producing first-pass analysis, organising information — were never just grunt work. They were how professionals developed judgment, pattern recognition, and the ability to distinguish what matters from what doesn't.</p>
-        <p>As AI handles more of that work, the pipeline that turned junior contributors into strategic thinkers is breaking down. <strong>Heavy reliance on AI tools correlates with declining critical thinking abilities</strong>, driven by cognitive offloading. The capability that took years to build is now going unexercised.</p>
+        <p>As AI handles more of that work, the pipeline that turned junior contributors into strategic thinkers is breaking down. <strong>Heavy reliance on AI tools correlates with declining critical thinking abilities</strong>, driven by cognitive offloading.<sup><a href="#cite-4" aria-label="Citation 4" style="color:var(--teal);text-decoration:none;font-family:'Poppins',sans-serif;font-size:9px;font-weight:600;vertical-align:super;margin-left:1px">4</a></sup> The capability that took years to build is now going unexercised.</p>
         <p>This library addresses that gap directly. Each skill is grounded in the WEF Core Skills 2030 framework and cross-referenced with research from McKinsey, Udemy, and Microsoft on what employers are actually struggling to find. They are not soft skills. They are the skills that determine whether people remain indispensable as AI handles the rest.</p>
       </div>
     </div>
@@ -170,6 +183,18 @@
   </div>
 </section>
 </main>
+
+<section class="citations" aria-label="Sources">
+  <div class="citations-inner">
+    <p class="section-label">Sources</p>
+    <ol>
+      <li><a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener noreferrer">World Economic Forum — Future of Jobs Report 2025</a>. Core skills change estimate (39%) and reskilling projection (59 in 100 workers).</li>
+      <li><a href="https://www.microsoft.com/en-us/worklab/work-trend-index" target="_blank" rel="noopener noreferrer">Microsoft — Work Trend Index 2025</a>. Workforce capacity and energy deficit data (80%).</li>
+      <li><a href="https://business.udemy.com/resources/global-learning-skills-trends-report/" target="_blank" rel="noopener noreferrer">Udemy — Global Learning & Skills Trends Report 2026</a>. Critical thinking learning growth (+37% year-over-year) and AI adoption at work (76%).</li>
+      <li id="cite-4">Gerlich, M. (2025). <a href="https://doi.org/10.3390/soc15010006" target="_blank" rel="noopener noreferrer">AI Tools in Society: Impacts on Cognitive Offloading and the Future of Critical Thinking</a>. <em>Societies</em>, 15(1), 6. Peer-reviewed study of 666 participants finding a significant negative correlation between frequent AI tool use and critical thinking ability, mediated by cognitive offloading.</li>
+    </ol>
+  </div>
+</section>
 
 <footer>
   <div class="fi">
