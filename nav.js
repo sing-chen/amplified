@@ -214,10 +214,21 @@
     document.documentElement.style.setProperty('--deck-offset', totalOffset + 'px');
   }
 
+  function injectFavicon() {
+    if (!document.querySelector('link[rel="icon"]')) {
+      var favicon = document.createElement('link');
+      favicon.rel  = 'icon';
+      favicon.type = 'image/png';
+      favicon.href = root('images/favicon.png');
+      document.head.appendChild(favicon);
+    }
+  }
+
   function injectNav() {
     // Inject styles into <head> if not already present
     if (!document.getElementById('site-nav-styles')) {
       var built = buildNavElements();
+      injectFavicon();
       document.head.appendChild(built.styleEl);
 
       // Prepend nav nodes to body
