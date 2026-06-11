@@ -260,14 +260,6 @@
     padding-top: 3px;
   }
 
-  /* bullet list */
-  .bullet-list { display: flex; flex-direction: column; gap: 14px; }
-  .bullet-item { display: flex; align-items: flex-start; gap: 16px; }
-  .bullet-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--teal); flex-shrink: 0; margin-top: 7px;
-  }
-
   /* comparison cards */
   .comp-card { border-radius: var(--radius); padding: 24px 28px; }
   .comp-without { background: #FDF0EC; border-top: 3px solid var(--terracotta); }
@@ -287,6 +279,47 @@
     border-radius: var(--radius); padding: 20px 16px;
     font-family: 'Inter', sans-serif;
     font-weight: 600; font-size: 15px; text-align: center;
+  }
+
+  /* issue tree */
+  .tree-root {
+    max-width: 420px; margin: 0 auto;
+    background: var(--terracotta); color: var(--off-white);
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px;
+    text-align: center; border-radius: var(--radius);
+    padding: 14px 22px; position: relative;
+  }
+  .tree-root::after {
+    content: ''; position: absolute;
+    left: 50%; bottom: -28px;
+    width: 2px; height: 28px;
+    background: var(--teal); transform: translateX(-1px);
+  }
+  .tree-branches {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    margin-top: 28px; position: relative;
+  }
+  .tree-branches::before {
+    content: ''; position: absolute;
+    top: -28px; left: 12.5%; right: 12.5%;
+    height: 2px; background: var(--teal);
+  }
+  .tree-branch { padding: 0 6px; position: relative; }
+  .tree-branch::before {
+    content: ''; position: absolute;
+    top: -28px; left: 50%;
+    width: 2px; height: 28px;
+    background: var(--teal); transform: translateX(-1px);
+  }
+  .tree-branch-box {
+    background: #C5DDD9; color: var(--deep-teal);
+    border-radius: var(--radius); padding: 14px 12px;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    text-align: center; line-height: 1.4;
+  }
+  .tree-branch-sub {
+    display: block; margin-top: 4px;
+    font-size: 11px; font-weight: 400; opacity: 0.75;
   }
 
   /* step chain */
@@ -573,22 +606,17 @@
     <span class="eyebrow" style="margin-bottom:8px;">Mental Model 3 of 3</span>
     <h2 class="h-heading" style="margin-bottom:4px;">The Issue Tree</h2>
     <p class="t-meta" style="margin-bottom:20px;">Management consulting practice · McKinsey &amp; Co.</p>
-    <p class="t-body" style="max-width:680px;margin-bottom:24px;">Decomposes a central question into branching sub-questions. Makes the full analytical territory visible and allows work to be structured rather than tackled as an undifferentiated whole.</p>
-    <div class="two-col" style="max-width:900px;">
-      <div class="comp-card comp-without">
-        <div class="comp-label comp-label-terra">Without</div>
-        <p class="t-body">Team investigates the most visible reason for low feature adoption. Spends two weeks on user onboarding. Problem persists because reliability and awareness were untouched.</p>
-      </div>
-      <div class="comp-card comp-with">
-        <div class="comp-label comp-label-teal">With Issue Tree</div>
-        <div class="bullet-list">
-          <div class="bullet-item"><div class="bullet-dot"></div><span class="t-body">Awareness — do users know it exists?</span></div>
-          <div class="bullet-item"><div class="bullet-dot"></div><span class="t-body">Clarity — do they know how to use it?</span></div>
-          <div class="bullet-item"><div class="bullet-dot"></div><span class="t-body">Relevance — does it solve their problem?</span></div>
-          <div class="bullet-item"><div class="bullet-dot"></div><span class="t-body">Reliability — does it work consistently?</span></div>
-        </div>
+    <p class="t-body" style="max-width:680px;margin-bottom:32px;">Decomposes a central question into branching sub-questions. Makes the full analytical territory visible and allows work to be structured rather than tackled as an undifferentiated whole.</p>
+    <div style="max-width:760px;margin:0 auto;">
+      <div class="tree-root">Why is feature adoption low?</div>
+      <div class="tree-branches">
+        <div class="tree-branch"><div class="tree-branch-box">Awareness<span class="tree-branch-sub">Do users know it exists?</span></div></div>
+        <div class="tree-branch"><div class="tree-branch-box">Clarity<span class="tree-branch-sub">Do they know how to use it?</span></div></div>
+        <div class="tree-branch"><div class="tree-branch-box">Relevance<span class="tree-branch-sub">Does it solve their problem?</span></div></div>
+        <div class="tree-branch"><div class="tree-branch-box">Reliability<span class="tree-branch-sub">Does it work consistently?</span></div></div>
       </div>
     </div>
+    <p class="t-body" style="max-width:700px;margin-top:32px;">Without the tree, a team typically investigates the most visible branch alone — here, awareness — and stops. <span class="t-teal" style="font-weight:500;">With it, all four branches stay visible: the team finds awareness and reliability are both partial causes, something a single-branch investigation would have missed.</span></p>
   </div>
 
   <!-- 09 · IN PRACTICE -->

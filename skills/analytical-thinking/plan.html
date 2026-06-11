@@ -264,6 +264,10 @@
     margin-bottom: 20px;
     color: var(--navy);
   }
+  .principles-intro {
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(45,117,111,0.08);
+  }
 
   /* ── SNAPSHOT CARDS ─────────────────────────── */
   .snapshot-grid {
@@ -400,6 +404,11 @@
     border-bottom: 1px solid rgba(45,117,111,0.08);
   }
   .principle:last-child { border-bottom: none; }
+  .principle:first-child {
+    border-top: 1px solid rgba(45,117,111,0.08);
+    padding-top: 32px;
+    margin-top: 28px;
+  }
   .principle-number {
     font-family: 'Poppins', sans-serif;
     font-size: 11px;
@@ -459,7 +468,7 @@
   .model-applied {
     background: var(--light-sage);
     border-radius: var(--radius);
-    padding: 16px 20px;
+    padding: 20px 28px;
     margin-top: 16px;
     border-left: 3px solid var(--terracotta);
   }
@@ -473,6 +482,116 @@
     margin-bottom: 6px;
   }
   .model-applied p { font-size: 14px; margin: 0; }
+
+  /* model diagrams — ported from the primer for visual continuity */
+  .model-diagram { margin-top: 20px; }
+  .model-diagram-caption {
+    text-align: center; margin-top: 10px;
+    font-size: 12px; color: var(--warm-gray);
+  }
+
+  /* MECE grid */
+  .mece-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .mece-cell {
+    border-radius: var(--radius); padding: 18px 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600; font-size: 15px; text-align: center;
+  }
+
+  /* 5 Whys step chain */
+  .step-chain { display: flex; flex-direction: column; gap: 12px; }
+  .step-item  { display: flex; align-items: flex-start; gap: 16px; }
+  .step-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--tag-analytical-bg);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700; font-size: 12px; color: var(--deep-teal);
+    flex-shrink: 0;
+  }
+  .step-num.root { background: var(--terracotta); color: var(--off-white); }
+  .step-item p { font-size: 14px; margin: 0; padding-top: 4px; line-height: 1.5; }
+  .step-meta { font-size: 12px; color: var(--warm-gray); }
+  .model-applied .step-meta { color: var(--navy); }
+  .model-applied .step-num { background: white; }
+  .model-applied .step-num.root { background: var(--terracotta); }
+  .step-root-label {
+    margin: 4px 0 0 48px;
+    font-family: 'Poppins', sans-serif; font-weight: 600;
+    font-size: 11px; color: var(--terracotta); letter-spacing: 0.04em;
+  }
+
+  /* issue tree */
+  .tree-root {
+    max-width: 420px; margin: 0 auto;
+    background: var(--terracotta); color: var(--off-white);
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px;
+    text-align: center; border-radius: var(--radius);
+    padding: 14px 22px; position: relative;
+  }
+  .tree-root::after {
+    content: ''; position: absolute;
+    left: 50%; bottom: -28px;
+    width: 2px; height: 28px;
+    background: var(--teal); transform: translateX(-1px);
+  }
+  .tree-branches {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    margin-top: 28px; position: relative;
+  }
+  .tree-branches::before {
+    content: ''; position: absolute;
+    top: -28px; left: 12.5%; right: 12.5%;
+    height: 2px; background: var(--teal);
+  }
+  .tree-branch { padding: 0 6px; position: relative; }
+  .tree-branch::before {
+    content: ''; position: absolute;
+    top: -28px; left: 50%;
+    width: 2px; height: 28px;
+    background: var(--teal); transform: translateX(-1px);
+  }
+  .tree-branch-box {
+    background: var(--tag-analytical-bg); color: var(--deep-teal);
+    border-radius: var(--radius); padding: 14px 10px;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    text-align: center; line-height: 1.4;
+  }
+  .tree-branch-sub {
+    display: block; margin-top: 4px;
+    font-size: 11px; font-weight: 400; opacity: 0.75;
+  }
+
+  /* fishbone diagram — traditional spine + diagonal bones + effect head */
+  .fishbone-diagram {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 760 / 260;
+    margin-top: 8px;
+  }
+  .fishbone-diagram svg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; display: block;
+  }
+  .fishbone-cat-label {
+    position: absolute; transform: translate(-50%, -50%);
+    background: white; color: var(--deep-teal);
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
+    text-align: center; border-radius: var(--radius);
+    padding: 10px 12px; white-space: normal;
+    max-width: 24%; line-height: 1.3;
+  }
+  .fishbone-cat-desc {
+    display: block; margin-top: 4px;
+    font-size: 11px; font-weight: 400; color: var(--navy); opacity: 0.85;
+  }
+  .fishbone-effect-label {
+    position: absolute; transform: translate(-50%, -50%);
+    color: var(--off-white);
+    font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700;
+    text-align: center; line-height: 1.25;
+    width: 100px; white-space: normal;
+  }
 
   /* ── MISTAKES ───────────────────────────────── */
   .mistake {
@@ -1265,6 +1384,7 @@
     <!-- 3. FIRST PRINCIPLES -->
     <div class="section section-even" id="principles">
       <h2>First Principles</h2>
+      <p class="principles-intro">Six principles, in sequence. Each builds on the one before it — decomposition makes structure possible, structure makes cause-tracing possible, and so on through to choosing the right framework for the problem in front of you. The mental models, behavioral indicators, and daily practices later in this plan are all applications of these six ideas.</p>
 
       <div class="principle">
         <div class="principle-number">Principle 01</div>
@@ -1324,6 +1444,15 @@
           <div class="model-applied-label">Applied</div>
           <p>A process architect diagnosing an over-budget project decomposes cost drivers into People, Technology, Process, Scope. Each category is examined once only — no double-counting, no blind spots between overlapping categories.</p>
         </div>
+        <div class="model-diagram">
+          <div class="mece-grid">
+            <div class="mece-cell" style="background:var(--tag-analytical-bg);color:var(--deep-teal);">People</div>
+            <div class="mece-cell" style="background:var(--light-sage);color:var(--navy);">Technology</div>
+            <div class="mece-cell" style="background:var(--tag-human-bg);color:var(--navy);">Process</div>
+            <div class="mece-cell" style="background:var(--tag-growth-bg);color:var(--charcoal);">Scope</div>
+          </div>
+          <p class="model-diagram-caption">No overlap. Full coverage.</p>
+        </div>
       </div>
 
       <div class="model-card">
@@ -1332,7 +1461,13 @@
         <p>A cause-tracing technique that works by repeatedly asking "why" in response to each answer until a root cause is reached — typically within five iterations. Interrupts the tendency to stop analysis at the first plausible explanation, which is almost always a symptom or intermediate cause.</p>
         <div class="model-applied">
           <div class="model-applied-label">Applied</div>
-          <p>Support ticket volume spikes. Why? Customers can't complete a workflow. Why? A UI update changed the flow without updating help docs. Why? No documentation review step in the release process. Why? Documentation ownership sits outside the release workflow. That's the cause — fixing it prevents recurrence.</p>
+          <div class="step-chain">
+            <div class="step-item"><div class="step-num">1</div><p><span class="step-meta">Why? &nbsp;</span>Support ticket volume is spiking</p></div>
+            <div class="step-item"><div class="step-num">2</div><p><span class="step-meta">Why? &nbsp;</span>Customers can't complete a key workflow</p></div>
+            <div class="step-item"><div class="step-num">3</div><p><span class="step-meta">Why? &nbsp;</span>A UI update changed the flow without updating help docs</p></div>
+            <div class="step-item"><div class="step-num root">4</div><p style="color:var(--terracotta);font-weight:500;"><span class="step-meta">Why? &nbsp;</span>No documentation review step in the release process — ownership sits outside the release workflow</p></div>
+          </div>
+          <div class="step-root-label">ROOT CAUSE IDENTIFIED</div>
         </div>
       </div>
 
@@ -1352,7 +1487,22 @@
         <p>Maps potential causes of a problem across standard categories — typically People, Process, Technology, Environment, Materials, Measurement — to ensure diagnostic coverage and make cause-effect relationships visually explicit. Most effective in operational and quality contexts where multiple contributing causes are likely.</p>
         <div class="model-applied">
           <div class="model-applied-label">Applied</div>
-          <p>A data team produces reports with a consistent error rate. A fishbone analysis across Process, Technology, People, and Measurement reveals four contributing causes. Fixing only the most visible one (manual entry) reduces but does not eliminate errors — because three other causes continue operating.</p>
+          <div class="fishbone-diagram">
+            <svg viewBox="0 0 760 260" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <line x1="110" y1="130" x2="470" y2="130" stroke="var(--teal)" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+              <line x1="210" y1="130" x2="140" y2="40" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+              <line x1="370" y1="130" x2="340" y2="40" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+              <line x1="210" y1="130" x2="140" y2="220" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+              <line x1="370" y1="130" x2="340" y2="220" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+              <path d="M470,60 L470,200 L660,130 Z" fill="var(--terracotta)"/>
+            </svg>
+            <div class="fishbone-cat-label" style="left:18.4%;top:15.4%;"><strong>Process</strong><span class="fishbone-cat-desc">No validation step before reports are published</span></div>
+            <div class="fishbone-cat-label" style="left:44.7%;top:15.4%;"><strong>Technology</strong><span class="fishbone-cat-desc">Source system doesn't enforce data types</span></div>
+            <div class="fishbone-cat-label" style="left:18.4%;top:84.6%;"><strong>People</strong><span class="fishbone-cat-desc">Manual entry introduces transcription errors — the most visible cause</span></div>
+            <div class="fishbone-cat-label" style="left:44.7%;top:84.6%;"><strong>Measurement</strong><span class="fishbone-cat-desc">Error rate definitions differ across teams</span></div>
+            <div class="fishbone-effect-label" style="left:70.4%;top:50%;">Consistent Error Rate</div>
+          </div>
+          <p style="margin-top:14px;">A data team produces reports with a consistent error rate. Fixing the most visible cause — manual entry — wouldn't eliminate it: the other three keep operating regardless.</p>
         </div>
       </div>
 
@@ -1363,6 +1513,15 @@
         <div class="model-applied">
           <div class="model-applied-label">Applied</div>
           <p>A product team needs to understand why a feature has low adoption. The issue tree branches: do users know it exists? (awareness) · do they understand how to use it? (clarity) · does it solve their problem? (relevance) · does it work reliably? (reliability). The team discovers awareness and reliability are both partial causes — without the tree, they would have investigated only the most visible one.</p>
+        </div>
+        <div class="model-diagram">
+          <div class="tree-root">Why is feature adoption low?</div>
+          <div class="tree-branches">
+            <div class="tree-branch"><div class="tree-branch-box">Awareness<span class="tree-branch-sub">Do users know it exists?</span></div></div>
+            <div class="tree-branch"><div class="tree-branch-box">Clarity<span class="tree-branch-sub">Do they know how to use it?</span></div></div>
+            <div class="tree-branch"><div class="tree-branch-box">Relevance<span class="tree-branch-sub">Does it solve their problem?</span></div></div>
+            <div class="tree-branch"><div class="tree-branch-box">Reliability<span class="tree-branch-sub">Does it work consistently?</span></div></div>
+          </div>
         </div>
       </div>
     </div>
