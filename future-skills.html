@@ -6,7 +6,7 @@
 <title>Future Skills Library · Amplified</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
-  :root{--deep-teal:#2D756F;--mid-teal:#2D756F;--teal:#5BA79F;--sage:#ACC4B6;--light-sage:#D8E4DD;--off-white:#F5F7F6;--charcoal:#2D3330;--navy:#1F4D4A;--warm-gray:#8B8A85;--terracotta:#C77B5F;--text-dark:#1F4D4A;--text-mid:#1F4D4A;--text-muted:#4A5C55;--white:#FFFFFF;--page-max:1100px;--radius:6px;--radius-lg:10px;--radius-xl:14px}
+  :root{--deep-teal:#2D756F;--mid-teal:#2D756F;--teal:#5BA79F;--sage:#ACC4B6;--light-sage:#D8E4DD;--off-white:#F5F7F6;--warm-cream:#EDE5C5;--charcoal:#2D3330;--navy:#1F4D4A;--warm-gray:#8B8A85;--terracotta:#C77B5F;--text-dark:#1F4D4A;--text-mid:#1F4D4A;--text-muted:#4A5C55;--white:#FFFFFF;--page-max:1100px;--radius:6px;--radius-lg:10px;--radius-xl:14px}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
   body{font-family:'Inter',system-ui,sans-serif;color:var(--text-dark);background:var(--off-white);font-size:16px;line-height:1.65}
@@ -63,20 +63,23 @@
 
   /* ── SKILL CARDS ── */
   .skill-list{display:flex;flex-direction:column;gap:16px}
-  .scard{background:var(--white);border:1px solid rgba(172,196,182,.25);border-radius:var(--radius-xl);overflow:hidden;transition:border-color .15s}
-  .scard:hover{border-color:rgba(45,117,111,.3)}
+  .scard{background:var(--white);border:1px solid rgba(172,196,182,.25);border-radius:var(--radius-xl);overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s}
+  .scard.cs:hover{border-color:rgba(45,117,111,.3)}
   .scard.active{border-color:rgba(45,117,111,.4);box-shadow:0 4px 24px rgba(27,74,68,.07)}
+  .scard.active:hover{border-color:rgba(45,117,111,.55);box-shadow:0 10px 30px rgba(27,74,68,.12);transform:translateY(-3px)}
+  .scard.active:hover .sstatus-strip{width:7px}
+  .scard.active:hover .skill-icon{transform:scale(1.08)}
   .scard.cs{opacity:.68}
   .sheader{display:flex;align-items:stretch;cursor:pointer;min-height:72px}
   .scard.cs .sheader{cursor:default}
 
   /* status strip — left edge */
-  .sstatus-strip{width:5px;flex-shrink:0}
+  .sstatus-strip{width:5px;flex-shrink:0;transition:width .2s}
   .scard.active .sstatus-strip{background:var(--mid-teal)}
   .scard.cs .sstatus-strip{width:0}
 
   /* skill icon */
-  .skill-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin:auto 0 auto 18px}
+  .skill-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin:auto 0 auto 18px;transition:transform .2s}
   .skill-icon svg{width:20px;height:20px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
   .si-cognitive{background:#D4EAE7;} .si-cognitive svg{stroke:#2D756F;}
   .si-self-efficacy{background:#F0D9D1;} .si-self-efficacy svg{stroke:#A0553F;}
@@ -122,7 +125,7 @@
   .slaunch{width:252px;flex-shrink:0}
   .ltitle{font-family:'Poppins',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid-teal);margin-bottom:12px}
   .lcards{display:flex;flex-direction:column;gap:10px}
-  .lcard{background:var(--off-white);border:1px solid rgba(172,196,182,.3);border-radius:var(--radius-lg);padding:14px 16px;text-decoration:none;display:block;transition:border-color .15s,background .15s,transform .1s}
+  .lcard{background:var(--warm-cream);border:1px solid rgba(172,196,182,.3);border-radius:var(--radius-lg);padding:14px 16px;text-decoration:none;display:block;transition:border-color .15s,background .15s,transform .1s}
   .lcard:hover{border-color:rgba(45,117,111,.45);background:var(--white);transform:translateY(-1px)}
   .lcard.primary{background:var(--deep-teal);border-color:transparent}
   .lcard.primary:hover{background:var(--teal)}
@@ -132,6 +135,13 @@
   .lcard.primary .lcdesc{color:rgba(255,255,255,.75)}
   .lccta{font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;color:var(--mid-teal);margin-top:6px;display:flex;align-items:center;gap:4px}
   .lcard.primary .lccta{color:var(--sage)}
+  .lcc-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto;transition:transform .15s}
+  .lcc-icon svg{width:11px;height:11px;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .lccta .lcc-icon{background:#D8E4DD}
+  .lccta .lcc-icon svg{stroke:#2D756F}
+  .lcard.primary .lccta .lcc-icon{background:#ACC4B6}
+  .lcard.primary .lccta .lcc-icon svg{stroke:#2D756F}
+  .lcard:hover .lcc-icon{transform:translateX(2px)}
 
   /* ── FILTER TABS ── */
   .filter-bar{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
@@ -155,7 +165,7 @@
     .sbody{padding:20px 16px}
     footer{padding:16px 20px}
   }
-  @media(prefers-reduced-motion:reduce){.scard,.lcard,.stoggle{transition:none}}
+  @media(prefers-reduced-motion:reduce){.scard,.lcard,.stoggle,.sstatus-strip,.skill-icon,.lcc-icon{transition:none}}
 </style>
 </head>
 <body>
@@ -267,12 +277,12 @@
             <a href="skills/analytical-thinking/primer.html" class="lcard" aria-label="Open Analytical Thinking Primer">
               <div class="lctype">Skill Primer</div>
               <div class="lcdesc">Short skill introduction. Core concepts, worked example, knowledge check. ~15 minutes.</div>
-              <div class="lccta">Open primer →</div>
+              <div class="lccta">Open primer<span class="lcc-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
             </a>
             <a href="skills/analytical-thinking/plan.html" class="lcard primary" aria-label="Open Analytical Thinking Full Learning Plan">
               <div class="lctype">Full Learning Plan</div>
               <div class="lcdesc">First principles, mental models, habit builder, behavioural indicators, and curated resources.</div>
-              <div class="lccta">Open full plan →</div>
+              <div class="lccta">Open full plan<span class="lcc-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
             </a>
           </div>
         </div>
@@ -298,60 +308,6 @@
       </div>
     </div>
 
-    <!-- RESILIENCE -->
-    <div class="scard cs" id="s-resilience" data-categories="self-efficacy" role="listitem">
-      <div class="sheader">
-        <div class="sstatus-strip"></div>
-        <div class="skill-icon si-self-efficacy">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <div class="shc">
-          <div class="stb">
-            <div class="skill-pills"><span class="skill-pill sp-self-efficacy">Self-Efficacy</span></div>
-            <div class="sname">Resilience, Flexibility &amp; Agility</div>
-          </div>
-          <div class="ssum">Recover from setbacks, adapt behaviour under pressure, and sustain productive momentum through uncertainty. <em>"How do I keep going?"</em></div>
-          <div class="sstatus ss-soon">Coming soon</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SYSTEMS THINKING -->
-    <div class="scard cs" id="s-systems" data-categories="cognitive management" role="listitem">
-      <div class="sheader">
-        <div class="sstatus-strip"></div>
-        <div class="skill-icon si-cognitive">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-        </div>
-        <div class="shc">
-          <div class="stb">
-            <div class="skill-pills"><span class="skill-pill sp-cognitive">Cognitive</span><span class="skill-pill sp-management">Management</span></div>
-            <div class="sname">Systems Thinking</div>
-          </div>
-          <div class="ssum">See interdependencies, feedback loops, and unintended consequences before they surface. <em>"What am I not seeing?"</em></div>
-          <div class="sstatus ss-soon">Coming soon</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STRATEGIC SYNTHESIS & DECISION MAKING -->
-    <div class="scard cs" id="s-strategic" data-categories="cognitive" role="listitem">
-      <div class="sheader">
-        <div class="sstatus-strip"></div>
-        <div class="skill-icon si-cognitive">
-          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <div class="shc">
-          <div class="stb">
-            <div class="skill-pills"><span class="skill-pill sp-cognitive">Cognitive</span></div>
-            <div class="sname">Strategic Synthesis &amp; Decision-Making</div>
-          </div>
-          <div class="ssum">Connect disparate information into a coherent picture and choose a path forward under uncertainty. <em>"What does this all mean — and what do we do?"</em></div>
-          <div class="sstatus ss-soon">Coming soon</div>
-        </div>
-      </div>
-    </div>
-
     <!-- CRITICAL THINKING -->
     <div class="scard cs" id="s-critical" data-categories="cognitive" role="listitem">
       <div class="sheader">
@@ -366,6 +322,24 @@
             <div class="sname">Critical Thinking</div>
           </div>
           <div class="ssum">Evaluate arguments, identify assumptions, and resist the pull of flawed reasoning — including your own. <em>"Is this actually true?"</em></div>
+          <div class="sstatus ss-soon">Coming soon</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMPATHY -->
+    <div class="scard cs" id="s-empathy" data-categories="engagement" role="listitem">
+      <div class="sheader">
+        <div class="sstatus-strip"></div>
+        <div class="skill-icon si-engagement">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="shc">
+          <div class="stb">
+            <div class="skill-pills"><span class="skill-pill sp-engagement">Engagement</span></div>
+            <div class="sname">Empathy &amp; Active Listening</div>
+          </div>
+          <div class="ssum">Understand what others mean — including what they don't say — and respond in ways that build trust and productive collaboration. <em>"Do I actually understand what you mean?"</em></div>
           <div class="sstatus ss-soon">Coming soon</div>
         </div>
       </div>
@@ -407,19 +381,55 @@
       </div>
     </div>
 
-    <!-- EMPATHY -->
-    <div class="scard cs" id="s-empathy" data-categories="engagement" role="listitem">
+    <!-- RESILIENCE -->
+    <div class="scard cs" id="s-resilience" data-categories="self-efficacy" role="listitem">
       <div class="sheader">
         <div class="sstatus-strip"></div>
-        <div class="skill-icon si-engagement">
-          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div class="skill-icon si-self-efficacy">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <div class="shc">
           <div class="stb">
-            <div class="skill-pills"><span class="skill-pill sp-engagement">Engagement</span></div>
-            <div class="sname">Empathy &amp; Active Listening</div>
+            <div class="skill-pills"><span class="skill-pill sp-self-efficacy">Self-Efficacy</span></div>
+            <div class="sname">Resilience, Flexibility &amp; Agility</div>
           </div>
-          <div class="ssum">Understand what others mean — including what they don't say — and respond in ways that build trust and productive collaboration. <em>"Do I actually understand what you mean?"</em></div>
+          <div class="ssum">Recover from setbacks, adapt behaviour under pressure, and sustain productive momentum through uncertainty. <em>"How do I keep going?"</em></div>
+          <div class="sstatus ss-soon">Coming soon</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STRATEGIC SYNTHESIS & DECISION MAKING -->
+    <div class="scard cs" id="s-strategic" data-categories="cognitive" role="listitem">
+      <div class="sheader">
+        <div class="sstatus-strip"></div>
+        <div class="skill-icon si-cognitive">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="shc">
+          <div class="stb">
+            <div class="skill-pills"><span class="skill-pill sp-cognitive">Cognitive</span></div>
+            <div class="sname">Strategic Synthesis &amp; Decision-Making</div>
+          </div>
+          <div class="ssum">Connect disparate information into a coherent picture and choose a path forward under uncertainty. <em>"What does this all mean — and what do we do?"</em></div>
+          <div class="sstatus ss-soon">Coming soon</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SYSTEMS THINKING -->
+    <div class="scard cs" id="s-systems" data-categories="cognitive management" role="listitem">
+      <div class="sheader">
+        <div class="sstatus-strip"></div>
+        <div class="skill-icon si-cognitive">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <div class="shc">
+          <div class="stb">
+            <div class="skill-pills"><span class="skill-pill sp-cognitive">Cognitive</span><span class="skill-pill sp-management">Management</span></div>
+            <div class="sname">Systems Thinking</div>
+          </div>
+          <div class="ssum">See interdependencies, feedback loops, and unintended consequences before they surface. <em>"What am I not seeing?"</em></div>
           <div class="sstatus ss-soon">Coming soon</div>
         </div>
       </div>
@@ -438,6 +448,24 @@
 </footer>
 
 <script>
+// Sort skill cards: Available Now first, then alphabetical by skill name within each group.
+// Runs once on load — re-applies automatically as cards gain/lose the "active" class.
+function sortSkillCards() {
+  var list = document.querySelector('.skill-list');
+  if (!list) return;
+  var cards = Array.prototype.slice.call(list.querySelectorAll('.scard'));
+  cards.sort(function(a, b) {
+    var aAvail = a.classList.contains('active') ? 0 : 1;
+    var bAvail = b.classList.contains('active') ? 0 : 1;
+    if (aAvail !== bAvail) return aAvail - bAvail;
+    var aName = (a.querySelector('.sname').textContent || '').trim();
+    var bName = (b.querySelector('.sname').textContent || '').trim();
+    return aName.localeCompare(bName);
+  });
+  cards.forEach(function(card) { list.appendChild(card); });
+}
+sortSkillCards();
+
 function filterSkills(filter) {
   document.querySelectorAll('.ftab').forEach(function(tab) {
     tab.classList.toggle('active', tab.dataset.filter === filter);
