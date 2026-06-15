@@ -100,6 +100,26 @@
     '.snav-links a:hover { color: #fff; background: rgba(255,255,255,0.08); }',
     '.snav-links a.snav-active { color: #1B4A44; background: #ACC4B6; }',
 
+    /* Mobile menu toggle (hidden on desktop) */
+    '.snav-toggle {',
+    '  display: none;',
+    '  align-items: center; justify-content: center;',
+    '  width: 36px; height: 36px;',
+    '  background: none; border: none; border-radius: 5px;',
+    '  color: #fff; cursor: pointer; padding: 0;',
+    '  margin-left: 8px; flex-shrink: 0;',
+    '  transition: background 0.15s;',
+    '}',
+    '.snav-toggle:hover { background: rgba(255,255,255,0.08); }',
+    '.snav-toggle svg {',
+    '  width: 22px; height: 22px;',
+    '  stroke: currentColor; fill: none;',
+    '  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;',
+    '}',
+    '.snav-toggle .snav-icon-close { display: none; }',
+    '#site-nav.menu-open .snav-toggle .snav-icon-menu  { display: none; }',
+    '#site-nav.menu-open .snav-toggle .snav-icon-close { display: block; }',
+
     /* Skill context bar */
     '#site-skill-bar {',
     '  position: fixed; top: var(--site-nav-h); left: 0; right: 0; z-index: 8999;',
@@ -133,10 +153,36 @@
     '.ssb-btn.ssb-btn-active { background: #2D756F; border-color: transparent; color: #fff; }',
 
     /* Focus styles for injected nav elements */
-    '#site-nav a:focus-visible, .ssb-btn:focus-visible {',
+    '#site-nav a:focus-visible, .ssb-btn:focus-visible, .snav-toggle:focus-visible {',
     '  outline: 2px solid #ACC4B6;',
     '  outline-offset: 3px;',
     '  border-radius: 4px;',
+    '}',
+
+    /* ── Mobile (≤768px): collapse site nav into a toggleable menu ────── */
+    '@media (max-width: 768px) {',
+    '  #site-nav { padding: 0 16px; }',
+    '  .snav-brand-tag { display: none; }',
+    '  .snav-brand-logo { width: 36px; height: 36px; }',
+    '  .snav-toggle { display: flex; }',
+    '  .snav-links {',
+    '    display: none;',
+    '    position: absolute;',
+    '    top: 100%; left: 0; right: 0;',
+    '    flex-direction: column;',
+    '    gap: 2px;',
+    '    background: #1B4A44;',
+    '    padding: 8px 16px 16px;',
+    '    border-bottom: 1px solid rgba(255,255,255,0.08);',
+    '    box-shadow: 0 8px 20px rgba(0,0,0,0.2);',
+    '  }',
+    '  #site-nav.menu-open .snav-links { display: flex; }',
+    '  .snav-links a {',
+    '    display: block;',
+    '    padding: 12px 10px;',
+    '    font-size: 15px;',
+    '    border-radius: 6px;',
+    '  }',
     '}',
   ].join('\n');
 
@@ -155,7 +201,11 @@
     '      <span class="snav-brand-tag">Build the capability that keeps compounding.</span>',
     '    </span>',
     '  </a>',
-    '  <ul class="snav-links">',
+    '  <button type="button" id="snav-toggle" class="snav-toggle" aria-expanded="false" aria-controls="snav-links" aria-label="Open menu">',
+    '    <svg class="snav-icon-menu" viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>',
+    '    <svg class="snav-icon-close" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="6" y1="18" x2="18" y2="6"></line></svg>',
+    '  </button>',
+    '  <ul class="snav-links" id="snav-links">',
     link('index.html',         'Home',          'home'),
     link('future-skills.html', 'Future Skills', 'future-skills'),
     link('about.html',         'About',         'about'),
@@ -264,9 +314,66 @@
     observer.observe(document.body, { childList: true });
   }
 
+  /* ── Mobile menu toggle ──────────────────────────────────────────────
+     Delegated on document/window so it keeps working even if the Primer
+     bundle wipes and re-inserts #site-nav.
+  ─────────────────────────────────────────────────────────────────────── */
+  function setupMobileMenu() {
+    if (window.__snavMenuInit) return;
+    window.__snavMenuInit = true;
+
+    function closeMenu(nav) {
+      nav.classList.remove('menu-open');
+      var toggle = document.getElementById('snav-toggle');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open menu');
+      }
+    }
+
+    document.addEventListener('click', function (e) {
+      var nav = document.getElementById('site-nav');
+      if (!nav) return;
+
+      var toggle = e.target.closest('#snav-toggle');
+      if (toggle) {
+        var isOpen = nav.classList.toggle('menu-open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        return;
+      }
+
+      if (nav.classList.contains('menu-open')) {
+        // Close on link click, or on any click outside the nav
+        if (e.target.closest('.snav-links a') || !nav.contains(e.target)) {
+          closeMenu(nav);
+        }
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      var nav = document.getElementById('site-nav');
+      if (!nav || !nav.classList.contains('menu-open')) return;
+      if (e.key === 'Escape') {
+        closeMenu(nav);
+        var toggle = document.getElementById('snav-toggle');
+        if (toggle) toggle.focus();
+      }
+    });
+
+    // If the viewport grows past the breakpoint while open, reset state
+    window.addEventListener('resize', function () {
+      var nav = document.getElementById('site-nav');
+      if (nav && window.innerWidth > 768 && nav.classList.contains('menu-open')) {
+        closeMenu(nav);
+      }
+    });
+  }
+
   /* ── Entry point ─────────────────────────────────────────────────────── */
   function init() {
     injectNav();
+    setupMobileMenu();
     // Only watch for wipe on the Primer page (has deck-stage)
     if (activePage === 'skill' && isPrimer) {
       watchForWipe();
