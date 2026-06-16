@@ -1291,6 +1291,11 @@
     border-collapse: collapse;
     margin: 24px 0;
     font-size: 14px;
+    background: #FFFFFF;
+    border: 1px solid var(--light-sage);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(31,77,74,0.06);
   }
   .resource-table th {
     font-family: 'Poppins', sans-serif;
@@ -1300,7 +1305,8 @@
     text-transform: uppercase;
     color: var(--teal);
     text-align: left;
-    padding: 10px 14px;
+    padding: 12px 14px;
+    background: var(--off-white);
     border-bottom: 2px solid var(--light-sage);
   }
   .resource-table th:nth-child(1) { width: 9%; }
@@ -1315,6 +1321,7 @@
     vertical-align: top;
     line-height: 1.5;
     color: var(--navy);
+    background: #FFFFFF;
   }
   .resource-table tr:last-child td { border-bottom: none; }
   .resource-table tr:hover td { background: color-mix(in srgb, var(--light-sage) 40%, transparent); }
