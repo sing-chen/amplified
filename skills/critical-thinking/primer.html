@@ -723,23 +723,21 @@
     <span class="eyebrow" style="margin-bottom:8px;">Mental Model</span>
     <h2 class="h-heading" style="margin-bottom:4px;">The Ladder of Inference</h2>
     <p class="t-meta" style="margin-bottom:20px;">Chris Argyris · popularised by Peter Senge, <em>The Fifth Discipline</em>, 1990</p>
-    <div class="model-layout" style="display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:start;">
-      <div>
-        <p class="t-body" style="margin-bottom:16px;">A model of how we move from raw observation to action through a series of narrowing steps — selecting data, adding meaning, assuming, concluding, believing, acting — often without noticing we've climbed at all.</p>
-        <p class="t-body">Most flawed conclusions aren't wrong because the underlying data was wrong. They're wrong because a step partway up the ladder went unexamined.</p>
+    <div class="model-layout" style="max-width:760px;">
+      <p class="t-body" style="margin-bottom:16px;">A model of how we move from raw observation to action through a series of narrowing steps — selecting data, adding meaning, assuming, concluding, believing, acting — often without noticing we've climbed at all.</p>
+      <p class="t-body">Most flawed conclusions aren't wrong because the underlying data was wrong. They're wrong because a step partway up the ladder went unexamined.</p>
+    </div>
+    <div class="ladder" style="max-width:760px;margin-top:24px;">
+      <div class="ladder-rung" style="width:42%;"><div class="ladder-rung-label">Act</div><div class="ladder-rung-desc">Recommend reverting the UI change</div></div>
+      <div class="ladder-rung" style="width:50%;"><div class="ladder-rung-label">Believe</div><div class="ladder-rung-desc">This UI change is hurting customers</div></div>
+      <div class="ladder-rung" style="width:58%;"><div class="ladder-rung-label">Conclude</div><div class="ladder-rung-desc">The UI change is confusing customers</div></div>
+      <div class="ladder-rung" style="width:68%;"><div class="ladder-rung-label">Assume</div><div class="ladder-rung-desc">This spike is the UI change</div></div>
+      <div class="ladder-leap-group" style="width:100%;">
+        <div class="ladder-leap-tag">The Leap</div>
+        <div class="ladder-rung" style="width:80%;"><div class="ladder-rung-label">Add Meaning</div><div class="ladder-rung-desc">UI changes are a known cause of support spikes</div></div>
+        <div class="ladder-rung" style="width:92%;"><div class="ladder-rung-label">Select</div><div class="ladder-rung-desc">Notice the UI-tagged tickets specifically</div></div>
       </div>
-      <div class="ladder">
-        <div class="ladder-rung" style="width:42%;"><div class="ladder-rung-label">Act</div><div class="ladder-rung-desc">Recommend reverting the UI change</div></div>
-        <div class="ladder-rung" style="width:50%;"><div class="ladder-rung-label">Believe</div><div class="ladder-rung-desc">This UI change is hurting customers</div></div>
-        <div class="ladder-rung" style="width:58%;"><div class="ladder-rung-label">Conclude</div><div class="ladder-rung-desc">The UI change is confusing customers</div></div>
-        <div class="ladder-rung" style="width:68%;"><div class="ladder-rung-label">Assume</div><div class="ladder-rung-desc">This spike is the UI change</div></div>
-        <div class="ladder-leap-group" style="width:100%;">
-          <div class="ladder-leap-tag">The Leap</div>
-          <div class="ladder-rung" style="width:80%;"><div class="ladder-rung-label">Add Meaning</div><div class="ladder-rung-desc">UI changes are a known cause of support spikes</div></div>
-          <div class="ladder-rung" style="width:92%;"><div class="ladder-rung-label">Select</div><div class="ladder-rung-desc">Notice the UI-tagged tickets specifically</div></div>
-        </div>
-        <div class="ladder-rung" style="width:100%;"><div class="ladder-rung-label">Data &amp; Facts</div><div class="ladder-rung-desc">Tickets up 40%, tagged across categories</div></div>
-      </div>
+      <div class="ladder-rung" style="width:100%;"><div class="ladder-rung-label">Data &amp; Facts</div><div class="ladder-rung-desc">Tickets up 40%, tagged across categories</div></div>
     </div>
     <p class="t-body" style="max-width:760px;margin-top:24px;">The leap happens between noticing the UI-tagged tickets and treating "UI changes cause spikes" as if it applied here — a pattern from general experience, applied to this specific, unverified situation.</p>
   </div>
