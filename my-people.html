@@ -72,7 +72,7 @@
 
 
   /* Related Skill */
-  .pskill-section{margin-bottom:16px}
+  .pskill-section{display:none}
   .pskill-label{font-family:'Poppins',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#3A6EA8;margin-bottom:6px}
   .pskill-pill{display:inline-flex;align-items:center;gap:5px;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:500;padding:4px 10px;border-radius:20px;background:#DDEAF7;color:#1D4E8F;line-height:1.3;text-decoration:none;transition:background .15s,color .15s}
   .pskill-pill:hover{background:#C5D9F2;color:#163C70}
@@ -80,6 +80,12 @@
   .pskill-pill.cs{background:#EEF3FA;color:#7A94B8;cursor:default;pointer-events:none}
   .pskill-pill.cs .pskill-cs{font-size:10px;opacity:.75;font-style:italic}
   .pskill-icon{width:11px;height:11px;flex-shrink:0;opacity:.7}
+
+  /* Quote */
+  .pquote{margin:10px 0 14px;padding:0}
+  .pquote-text{font-family:'Inter',sans-serif;font-size:13px;font-style:italic;line-height:1.6;color:var(--text-muted)}
+  .pquote-text::before{content:'\201C';font-family:'Poppins',sans-serif;font-size:20px;font-style:normal;font-weight:700;color:var(--mid-teal);line-height:0;vertical-align:-5px;margin-right:2px}
+  .pquote-source{font-family:'Poppins',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-top:5px;opacity:.7}
 
   /* description */
   .pdesc{font-family:'Inter',sans-serif;font-size:13.5px;line-height:1.65;color:var(--navy);margin-bottom:16px}
@@ -184,6 +190,10 @@
           <div class="ppills"><span class="ppill pp-leadership">Leadership</span></div>
           <a href="https://simonsinek.com" target="_blank" rel="noopener" aria-label="Simon Sinek website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>simonsinek.com</a>
         </div>
+        <div class="pquote">
+          <div class="pquote-text">People don't buy what you do; they buy why you do it.</div>
+          <div class="pquote-source">— Start With Why</div>
+        </div>
         <div class="pdesc">Simon Sinek is a prominent figure in the fields of leadership, motivation, and organisational culture. He is renowned for his groundbreaking Golden Circle concept — his theory that individuals and organisations who inspire genuine action do so by starting with "why": their purpose, cause, or belief.</div>
         <div class="pskill-section">
           <div class="pskill-label">Related Skill</div>
@@ -215,6 +225,10 @@
           <div class="ppills"><span class="ppill pp-communication">Communication</span></div>
           <a href="https://www.scienceofpeople.com" target="_blank" rel="noopener" aria-label="Vanessa Van Edwards website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>scienceofpeople.com</a>
         </div>
+        <div class="pquote">
+          <div class="pquote-text">Vulnerability is what truly elevates relationships.</div>
+          <div class="pquote-source">— Captivate</div>
+        </div>
         <div class="pdesc">Vanessa Van Edwards is a behavioural investigator and author known for decoding human behaviour, communication, and charisma. Her expertise provides practical insights into effective communication, relationship-building, leadership, and negotiation skills.</div>
         <div class="pskill-section">
           <div class="pskill-label">Related Skill</div>
@@ -245,6 +259,10 @@
           <div class="ppills"><span class="ppill pp-communication">Communication</span></div>
           <a href="https://www.blackswanltd.com" target="_blank" rel="noopener" aria-label="Chris Voss website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>blackswanltd.com</a>
         </div>
+        <div class="pquote">
+          <div class="pquote-text">Listening is not a passive activity. It is the most active thing you can do.</div>
+          <div class="pquote-source">— Never Split the Difference</div>
+        </div>
         <div class="pdesc">Chris Voss is an author, instructor, keynote speaker, and former FBI hostage negotiator who successfully resolved numerous high-stakes situations. He is a renowned expert in human behaviour, psychology, and communication and persuasion techniques.</div>
         <div class="pskill-section">
           <div class="pskill-label">Related Skill</div>
@@ -274,6 +292,10 @@
           <div class="pname">Adam Grant</div>
           <div class="ppills"><span class="ppill pp-psychology">Psychology</span></div>
           <a href="https://adamgrant.net" target="_blank" rel="noopener" aria-label="Adam Grant website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>adamgrant.net</a>
+        </div>
+        <div class="pquote">
+          <div class="pquote-text">If knowledge is power, knowing what we don't know is wisdom.</div>
+          <div class="pquote-source">— Think Again</div>
         </div>
         <div class="pdesc">Adam Grant is an organisational psychologist, bestselling author, and professor at the Wharton School. His research challenges conventional thinking on motivation, generosity, and how we form and revise our beliefs — exploring what drives people to perform, contribute, and change their minds.</div>
         <div class="pskill-section">
@@ -306,6 +328,10 @@
           <div class="ppills"><span class="ppill pp-ai">AI</span></div>
           <a href="https://www.oneusefulthing.org" target="_blank" rel="noopener" aria-label="Ethan Mollick website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>oneusefulthing.org</a>
         </div>
+        <div class="pquote">
+          <div class="pquote-text">We have invented a kind of alien mind.</div>
+          <div class="pquote-source">— Co-Intelligence</div>
+        </div>
         <div class="pdesc">Ethan Mollick is a professor at the Wharton School and one of the most rigorous researchers studying how AI is changing the way people work and learn. His work cuts through the noise with empirical evidence on human-AI collaboration, adoption patterns, and what it actually takes to integrate AI into how organisations operate.</div>
         <div class="pskill-section">
           <div class="pskill-label">Related Skill</div>
@@ -336,6 +362,10 @@
           <div class="ppills"><span class="ppill pp-influence">Influence</span></div>
           <a href="https://www.shadezahrai.com" target="_blank" rel="noopener" aria-label="Shade Zahrai website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>shadezahrai.com</a>
         </div>
+        <div class="pquote">
+          <div class="pquote-text">Stepping outside your comfort zone doesn't mean you become immunized to pain.</div>
+          <div class="pquote-source">— Big Trust</div>
+        </div>
         <div class="pdesc">A renowned leadership consultant, author, and speaker, Shade's expertise lies in developing authentic leadership practices, empowering employees, fostering a positive work culture, navigating complex business challenges, and promoting personal and professional well-being.</div>
         <div class="pskill-section">
           <div class="pskill-label">Related Skill</div>
@@ -364,6 +394,10 @@
           <div class="pname">Brené Brown</div>
           <div class="ppills"><span class="ppill pp-leadership">Leadership</span></div>
           <a href="https://brenebrown.com" target="_blank" rel="noopener" aria-label="Brené Brown website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>brenebrown.com</a>
+        </div>
+        <div class="pquote">
+          <div class="pquote-text">I define a leader as anyone who takes responsibility for finding the potential in people and processes.</div>
+          <div class="pquote-source">— Dare to Lead</div>
         </div>
         <div class="pdesc">Brené Brown is a research professor, author, and speaker whose work centres on vulnerability, courage, and the human conditions that underpin authentic leadership. Her decades of research make the empirical case that the qualities often dismissed as soft — empathy, shame resilience, and emotional honesty — are the foundations of high-performing cultures.</div>
         <div class="pskill-section">
@@ -395,6 +429,10 @@
           <div class="pname">Cal Newport</div>
           <div class="ppills"><span class="ppill pp-productivity">Productivity</span></div>
           <a href="https://calnewport.com" target="_blank" rel="noopener" aria-label="Cal Newport website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>calnewport.com</a>
+        </div>
+        <div class="pquote">
+          <div class="pquote-text">Who you are, what you think, feel, and do, what you love — is the sum of what you focus on.</div>
+          <div class="pquote-source">— Deep Work</div>
         </div>
         <div class="pdesc">Cal Newport is a computer science professor, author, and one of the most compelling voices on how to do meaningful work in a world designed for distraction. His writing makes the case for depth over constant connectivity, and for building a professional life around focused effort rather than busyness.</div>
         <div class="pskill-section">
