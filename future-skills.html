@@ -51,6 +51,16 @@
   .sb-source a:hover{border-bottom-color:rgba(255,255,255,.40)}
   .sb-source a:focus-visible{outline:2px solid var(--sage);outline-offset:2px;border-radius:2px}
 
+  /* ── PAGE NAV ── */
+  .page-nav{position:sticky;top:0;z-index:200;background:rgba(27,74,68,.97);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.07)}
+  .pn-inner{max-width:var(--page-max);margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .pn-inner::-webkit-scrollbar{display:none}
+  .pn-link{font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.52);text-decoration:none;padding:11px 0;white-space:nowrap;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;flex-shrink:0}
+  .pn-link:hover{color:rgba(255,255,255,.85)}
+  .pn-link.active{color:var(--sage);border-bottom-color:var(--sage)}
+  .pn-link:focus-visible{outline:2px solid var(--sage);outline-offset:-2px;border-radius:2px}
+  .pn-sep{color:rgba(255,255,255,.2);font-size:11px;padding:0 12px;flex-shrink:0;user-select:none;pointer-events:none}
+
   /* ── WHY THIS EXISTS ── */
   .why{padding:72px 40px;max-width:var(--page-max);margin:0 auto}
   .section-label{font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mid-teal);margin-bottom:12px}
@@ -73,8 +83,8 @@
   .wc-slate .wc-icon{background:#D5DFE6;} .wc-slate .wc-icon svg{stroke:#4A6878;}
 
   /* ── WEF CHART SECTION ── */
-  .chart-section{background:var(--white);border-top:1px solid rgba(172,196,182,.2);border-bottom:1px solid rgba(172,196,182,.2);padding:72px 40px}
-  .chart-inner{max-width:var(--page-max);margin:0 auto}
+  .chart-section{background:var(--white);border-top:1px solid rgba(172,196,182,.2);border-bottom:1px solid rgba(172,196,182,.2);padding:72px 0}
+  .chart-inner{max-width:var(--page-max);margin:0 auto;padding:0 40px}
   .chart-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
   .chart-hl{font-family:'Poppins',sans-serif;font-size:clamp(20px,2.4vw,28px);font-weight:700;color:var(--text-dark);line-height:1.2;letter-spacing:-.01em;margin-bottom:16px}
   .chart-body{font-family:'Inter',sans-serif;font-size:15px;line-height:1.8;color:var(--navy)}
@@ -102,8 +112,9 @@
   .chart-source a{color:var(--warm-gray);text-decoration:none;border-bottom:1px solid rgba(139,138,133,.3);transition:color .15s}
   .chart-source a:hover{color:var(--navy)}
 
-  /* ── INTRO ── */
-  .intro{padding:56px 40px 48px;max-width:var(--page-max);margin:0 auto}
+  /* ── ABOUT THE LIBRARY ── */
+  .intro{padding:56px 40px 48px;background:#EEF4F0}
+  .intro-inner{max-width:var(--page-max);margin:0 auto}
   .intro-grid{display:grid;grid-template-columns:1fr 320px;gap:64px;align-items:start}
   .ib{font-family:'Inter',sans-serif;font-size:15.5px;line-height:1.8;color:var(--navy)}
   .ib p+p{margin-top:16px}
@@ -128,7 +139,6 @@
   .how-connector-line{width:1px;height:20px;background:rgba(172,196,182,.4);position:absolute;top:-10px}
 
   /* ── LIBRARY ── */
-  .divider{height:1px;background:rgba(172,196,182,.2);margin:0 40px}
   .library{padding:52px 40px 80px;max-width:var(--page-max);margin:0 auto}
   .lib-hdr{margin-bottom:36px}
   .stitle{font-family:'Poppins',sans-serif;font-size:clamp(20px,2.4vw,26px);font-weight:700;color:var(--text-dark);line-height:1.2;letter-spacing:-.01em}
@@ -220,15 +230,24 @@
   .filter-empty{display:none;padding:32px 0;font-family:'Inter',sans-serif;font-size:14px;color:var(--text-muted)}
   .filter-empty.visible{display:block}
 
-  /* ── CITATIONS ── */
-  .citations{border-top:1px solid rgba(172,196,182,.30);padding:32px 40px 36px;background:var(--light-sage)}
-  .citations-inner{max-width:var(--page-max);margin:0 auto}
-  .citations ol{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:6px;counter-reset:cite}
-  .citations li{counter-increment:cite;display:flex;gap:10px;font-family:'Inter',sans-serif;font-size:12px;line-height:1.6;color:var(--text-muted)}
-  .citations li::before{content:counter(cite)'.';font-family:'Poppins',sans-serif;font-size:10px;font-weight:600;color:var(--teal);min-width:14px;padding-top:1px;flex-shrink:0}
-  .citations a{color:var(--navy);text-decoration:none;border-bottom:1px solid rgba(31,77,74,.25);transition:border-color .15s,color .15s}
-  .citations a:hover{color:var(--deep-teal);border-bottom-color:var(--deep-teal)}
-  .citations a:focus-visible{outline:2px solid var(--mid-teal);outline-offset:2px;border-radius:2px}
+  /* ── SOURCES CALLOUT ── */
+  .sources-callout{margin-top:40px;border:1px solid rgba(172,196,182,.3);border-radius:var(--radius-lg);overflow:hidden}
+  .sources-callout summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;cursor:pointer;list-style:none;background:var(--light-sage);transition:background .15s}
+  .sources-callout summary::-webkit-details-marker{display:none}
+  .sources-callout summary:hover{background:#D0DFDA}
+  .sources-callout summary:focus-visible{outline:2px solid var(--mid-teal);outline-offset:-2px}
+  .sc-label{font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mid-teal);display:flex;align-items:center;gap:8px}
+  .sc-label svg{width:13px;height:13px;fill:none;stroke:var(--mid-teal);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+  .sc-chevron{width:14px;height:14px;flex-shrink:0;fill:none;stroke:var(--mid-teal);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s ease}
+  .sources-callout[open] .sc-chevron{transform:rotate(180deg)}
+  @media(prefers-reduced-motion:reduce){.sc-chevron{transition:none}}
+  .sc-body{padding:20px 20px 22px;background:var(--white)}
+  .sc-body ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;counter-reset:cite}
+  .sc-body li{counter-increment:cite;display:flex;gap:10px;font-family:'Inter',sans-serif;font-size:12px;line-height:1.65;color:var(--text-muted)}
+  .sc-body li::before{content:counter(cite)'.';font-family:'Poppins',sans-serif;font-size:10px;font-weight:600;color:var(--teal);min-width:14px;padding-top:1px;flex-shrink:0}
+  .sc-body a{color:var(--navy);text-decoration:none;border-bottom:1px solid rgba(31,77,74,.25);transition:border-color .15s,color .15s}
+  .sc-body a:hover{color:var(--deep-teal);border-bottom-color:var(--deep-teal)}
+  .sc-body a:focus-visible{outline:2px solid var(--mid-teal);outline-offset:2px;border-radius:2px}
 
   footer{background:var(--charcoal);padding:24px 40px;border-top:1px solid rgba(255,255,255,.06)}
   .fi{max-width:var(--page-max);margin:0 auto}
@@ -241,13 +260,16 @@
     .slaunch{width:100%}
   }
   @media(max-width:640px){
-    .hero,.why,.intro,.library,.citations,.chart-section{padding-left:20px;padding-right:20px}
+    .hero,.why,.library,.chart-section{padding-left:20px;padding-right:20px}
+    .intro{padding-left:20px;padding-right:20px}
+    .intro-inner{padding:0}
     .signal-bar{padding-left:20px;padding-right:20px}
+    .pn-inner{padding:0 20px}
     .sb-stat{min-width:150px}
+    .chart-inner{padding:0 20px}
     .chart-wrap{padding:20px 16px 16px}
     .chart-modal{padding:16px}
     .chart-modal-close{top:12px;right:12px}
-    .divider{margin:0 20px}
     .shc{padding:14px 16px}
     .ssum{display:none}
     .sbody{padding:20px 16px}
@@ -260,7 +282,7 @@
 <a href="#main-content" class="skip-link">Skip to main content</a>
 <script src="nav.js"></script>
 
-<section class="hero">
+<section class="hero" id="overview">
   <svg class="hero-pattern" viewBox="0 0 600 400" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false">
     <g stroke="#5BA79F" stroke-width="1.2" fill="none">
       <line x1="60" y1="70" x2="190" y2="30"/>
@@ -308,6 +330,21 @@
   </div>
 </section>
 
+<!-- ── PAGE NAV ── -->
+<nav class="page-nav" aria-label="Page sections">
+  <div class="pn-inner">
+    <a class="pn-link" href="#overview">Overview</a>
+    <span class="pn-sep" aria-hidden="true">|</span>
+    <a class="pn-link" href="#why-this-matters">Why This Matters</a>
+    <span class="pn-sep" aria-hidden="true">|</span>
+    <a class="pn-link" href="#the-evidence">The Evidence</a>
+    <span class="pn-sep" aria-hidden="true">|</span>
+    <a class="pn-link" href="#about-the-library">About the Library</a>
+    <span class="pn-sep" aria-hidden="true">|</span>
+    <a class="pn-link" href="#the-library">The Library</a>
+  </div>
+</nav>
+
 <main id="main-content">
 
 <!-- ── SIGNAL BAR ── -->
@@ -342,7 +379,7 @@
 </div>
 
 <!-- ── WHY THIS EXISTS ── -->
-<section class="why" aria-labelledby="why-heading">
+<section class="why" aria-labelledby="why-heading" id="why-this-matters">
   <p class="section-label">Why this matters</p>
   <div class="why-grid">
     <div>
@@ -392,10 +429,28 @@
       </div>
     </div>
   </div>
+
+  <details class="sources-callout">
+    <summary>
+      <span class="sc-label">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Sources
+      </span>
+      <svg class="sc-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+    </summary>
+    <div class="sc-body">
+      <ol>
+        <li><a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener noreferrer">World Economic Forum — Future of Jobs Report 2025</a>. Core skills change estimate (39%) and reskilling projection (59 in 100 workers).</li>
+        <li><a href="https://www.microsoft.com/en-us/worklab/work-trend-index" target="_blank" rel="noopener noreferrer">Microsoft — Work Trend Index 2025</a>. Workforce capacity and energy deficit data (80%).</li>
+        <li><a href="https://business.udemy.com/2026-global-learning-skills-trends-report" target="_blank" rel="noopener noreferrer">Udemy — Global Learning & Skills Trends Report 2026</a>. Critical thinking learning growth (+37% year-over-year) and AI adoption at work (76%).</li>
+        <li id="cite-4">Gerlich, M. (2025). <a href="https://doi.org/10.3390/soc15010006" target="_blank" rel="noopener noreferrer">AI Tools in Society: Impacts on Cognitive Offloading and the Future of Critical Thinking</a>. <em>Societies</em>, 15(1), 6. Peer-reviewed study of 666 participants finding a significant negative correlation between frequent AI tool use and critical thinking ability, mediated by cognitive offloading.</li>
+      </ol>
+    </div>
+  </details>
 </section>
 
 <!-- ── WEF SKILLS SCATTER CHART ── -->
-<section class="chart-section" aria-labelledby="chart-heading">
+<section class="chart-section" aria-labelledby="chart-heading" id="the-evidence">
   <div class="chart-inner">
     <div class="chart-grid">
       <div class="chart-header">
@@ -433,10 +488,13 @@
   </div>
 </div>
 
-<!-- ── INTRO / HOW IT WORKS ── -->
-<section class="intro" aria-labelledby="intro-heading">
+<!-- ── ABOUT THE LIBRARY ── -->
+<section class="intro" aria-labelledby="about-heading" id="about-the-library">
+  <div class="intro-inner">
   <div class="intro-grid">
     <div class="ib">
+      <p class="section-label">About the library</p>
+      <h2 class="why-hl" id="about-heading">What's here, and how to use it</h2>
       <p>The skills in this library are not the ones getting the most attention in L&D conversations right now. Most organisations are focused on AI fluency — and that matters. But <strong>the skills that make a difference as AI handles more cognitive work</strong> are the ones that have always stood the test of time and don't get automated away: analytical reasoning, creative problem-solving, systems awareness, resilience, the ability to lead without authority.</p>
       <p>Each skill here is standalone — a self-contained resource you can start with wherever it's most relevant to your work right now. Over time, as the library grows, related skills will be packaged into guided learning journeys for people who want a more structured path through a connected set of capabilities.</p>
       <p>Every entry includes two access points: a short primer that covers the core concept, and a full learning plan with curated resources, activities, and a habit builder you can embed into real work. Start with whichever fits your time and intent.</p>
@@ -462,24 +520,15 @@
             <div class="how-step-sub">Self-paced · Curated resources, frameworks, habit builder, behavioural indicators</div>
           </div>
         </div>
-        <div class="how-step hs-journey">
-          <div class="how-step-icon">
-            <svg viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>
-          </div>
-          <div>
-            <div class="how-step-label">Guided Journeys</div>
-            <div class="how-step-sub">Related skills bundled into structured learning paths</div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
+  </div>
 </section>
 
-<div class="divider"></div>
-
 <!-- ── LIBRARY ── -->
-<section class="library" aria-label="Skills library">
+<div style="background:var(--white)">
+<section class="library" aria-label="Skills library" id="the-library">
   <div class="lib-hdr">
     <p class="section-label">The library</p>
     <h2 class="stitle">Browse by skill</h2>
@@ -713,20 +762,9 @@
 
   </div>
 </section>
+</div>
 
 </main>
-
-<section class="citations" aria-label="Sources">
-  <div class="citations-inner">
-    <p class="section-label">Sources</p>
-    <ol>
-      <li><a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener noreferrer">World Economic Forum — Future of Jobs Report 2025</a>. Core skills change estimate (39%) and reskilling projection (59 in 100 workers).</li>
-      <li><a href="https://www.microsoft.com/en-us/worklab/work-trend-index" target="_blank" rel="noopener noreferrer">Microsoft — Work Trend Index 2025</a>. Workforce capacity and energy deficit data (80%).</li>
-      <li><a href="https://business.udemy.com/2026-global-learning-skills-trends-report" target="_blank" rel="noopener noreferrer">Udemy — Global Learning & Skills Trends Report 2026</a>. Critical thinking learning growth (+37% year-over-year) and AI adoption at work (76%).</li>
-      <li id="cite-4">Gerlich, M. (2025). <a href="https://doi.org/10.3390/soc15010006" target="_blank" rel="noopener noreferrer">AI Tools in Society: Impacts on Cognitive Offloading and the Future of Critical Thinking</a>. <em>Societies</em>, 15(1), 6. Peer-reviewed study of 666 participants finding a significant negative correlation between frequent AI tool use and critical thinking ability, mediated by cognitive offloading.</li>
-    </ol>
-  </div>
-</section>
 
 <footer>
   <div class="fi">
@@ -759,6 +797,37 @@
   trigger.addEventListener('click', openModal);
   closeBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+})();
+
+// Page nav active state via IntersectionObserver
+(function(){
+  var sections = ['overview','why-this-matters','the-evidence','about-the-library','the-library'];
+  var navLinks = {};
+  sections.forEach(function(id){
+    var link = document.querySelector('.page-nav a[href="#' + id + '"]');
+    if(link) navLinks[id] = link;
+  });
+  var current = sections[0];
+  function setActive(id){
+    if(id === current) return;
+    current = id;
+    Object.values(navLinks).forEach(function(l){ l.classList.remove('active'); });
+    if(navLinks[id]) navLinks[id].classList.add('active');
+  }
+  if(!('IntersectionObserver' in window)){
+    if(navLinks[sections[0]]) navLinks[sections[0]].classList.add('active');
+    return;
+  }
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting) setActive(entry.target.id);
+    });
+  },{rootMargin:'-20% 0px -70% 0px',threshold:0});
+  sections.forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) observer.observe(el);
+  });
+  if(navLinks[sections[0]]) navLinks[sections[0]].classList.add('active');
 })();
 
 // Skill card sort and filter
