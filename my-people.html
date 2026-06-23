@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My People · Amplified</title>
 <meta name="description" content="The thinkers, coaches, and practitioners I return to — my virtual board of advisors. Each of them sharpens a different dimension of how I think and operate.">
 <link rel="canonical" href="https://sing-chen.github.io/amplified/my-people.html">
@@ -29,20 +34,52 @@
   /* ── PEOPLE SECTION ── */
   .people-section{padding:52px 40px 80px;max-width:1400px;margin:0 auto}
 
-  /* ── FILTER TABS ── */
-
-  .pcard.hidden{display:none}
-
-
   /* ── PEOPLE GRID ── */
   .people-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;align-items:start}
 
   /* ── PERSON CARD ── */
-  .pcard{background:var(--white);border:1px solid rgba(172,196,182,.25);border-radius:var(--radius-xl);overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s}
+  .pcard{
+    background:var(--white);
+    border:1px solid rgba(172,196,182,.25);
+    border-radius:var(--radius-xl);
+    overflow:hidden;
+    transition:border-color .2s,box-shadow .2s,transform .2s;
+    /* left border accent — default, overridden per category */
+    border-left:4px solid #ACC4B6;
+    /* scroll-in animation initial state */
+    opacity:0;
+    transform:translateY(20px);
+  }
+  .pcard.is-visible{
+    opacity:1;
+    transform:translateY(0);
+    transition:opacity .5s ease,transform .5s ease,border-color .2s,box-shadow .2s;
+  }
+  @media(prefers-reduced-motion:reduce){
+    .pcard{opacity:1;transform:none;transition:none}
+    .pcard.is-visible{transition:none}
+  }
   .pcard:hover{border-color:rgba(45,117,111,.45);box-shadow:0 10px 30px rgba(27,74,68,.1);transform:translateY(-3px)}
+  .pcard.is-visible:hover{transform:translateY(-3px)}
+
+  /* ── CATEGORY LEFT BORDER COLOURS ── */
+  .pcard[data-categories~="leadership"]  {border-left-color:#C77B5F}
+  .pcard[data-categories~="psychology"]  {border-left-color:#5B7C8F}
+  .pcard[data-categories~="communication"]{border-left-color:#D9A05B}
+  .pcard[data-categories~="influence"]   {border-left-color:#C77B5F}
+  .pcard[data-categories~="productivity"]{border-left-color:#2D756F}
+  .pcard[data-categories~="ai"]          {border-left-color:#ACC4B6}
+
+  /* ── CATEGORY PHOTO HEADER TINTS ── */
+  .pcard[data-categories~="leadership"]   .pcard-photo{background:#3D2218}
+  .pcard[data-categories~="psychology"]   .pcard-photo{background:#1E2D38}
+  .pcard[data-categories~="communication"].pcard-photo{background:#3A2C0A}
+  .pcard[data-categories~="influence"]    .pcard-photo{background:#3A2218}
+  .pcard[data-categories~="productivity"] .pcard-photo{background:#1B3D38}
+  .pcard[data-categories~="ai"]           .pcard-photo{background:#1B4A44}
 
   /* photo */
-  .pcard-photo{height:220px;background:#1B4A44;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+  .pcard-photo{height:220px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
   .pcard-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;position:absolute;inset:0}
   .pcard-placeholder{width:72px;height:72px;flex-shrink:0}
 
@@ -57,9 +94,6 @@
   .pext-link:focus-visible{outline:2px solid var(--mid-teal);outline-offset:2px}
   .pext-link svg{width:11px;height:11px;flex-shrink:0;opacity:.6}
 
-  /* tagline */
-
-
   /* category pill */
   .ppills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
   .ppill{font-family:'Poppins',sans-serif;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:20px}
@@ -70,6 +104,17 @@
   .pp-productivity{background:#D8E4DD;color:#1F4D4A}
   .pp-ai         {background:#EDE5C5;color:#5A3A00}
 
+  /* ── PERSONAL ANNOTATION ── */
+  .pannotation{
+    font-family:'Inter',sans-serif;
+    font-size:13px;
+    font-weight:500;
+    line-height:1.55;
+    color:#2D756F;
+    margin-bottom:12px;
+    padding-bottom:12px;
+    border-bottom:1px solid rgba(172,196,182,.2);
+  }
 
   /* Related Skill */
   .pskill-section{display:none}
@@ -81,10 +126,28 @@
   .pskill-pill.cs .pskill-cs{font-size:10px;opacity:.75;font-style:italic}
   .pskill-icon{width:11px;height:11px;flex-shrink:0;opacity:.7}
 
-  /* Quote */
-  .pquote{margin:10px 0 14px;padding:0}
-  .pquote-text{font-family:'Inter',sans-serif;font-size:13px;font-style:italic;line-height:1.6;color:var(--mid-teal)}
-  .pquote-text::before{content:'\201C';font-family:'Poppins',sans-serif;font-size:20px;font-style:normal;font-weight:700;color:var(--mid-teal);line-height:0;vertical-align:-5px;margin-right:2px}
+  /* ── QUOTE — decorative oversized mark ── */
+  .pquote{margin:0 0 14px;padding:0;position:relative}
+  .pquote-mark{
+    font-family:'Poppins',sans-serif;
+    font-size:52px;
+    font-weight:700;
+    line-height:1;
+    color:#ACC4B6;
+    display:block;
+    margin-bottom:-10px;
+    margin-left:-2px;
+    user-select:none;
+    aria-hidden:true;
+  }
+  .pquote-text{
+    font-family:'Inter',sans-serif;
+    font-size:13px;
+    font-style:italic;
+    line-height:1.6;
+    color:#1F4D4A;
+    padding-left:2px;
+  }
   .pquote-source{font-family:'Poppins',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-top:5px;opacity:.7}
 
   /* description */
@@ -94,7 +157,6 @@
   .pcard-divider{height:1px;background:rgba(172,196,182,.2);margin-bottom:14px}
 
   /* key works */
-  /* Collapsible Key Works */
   .pworks-toggle{display:flex;align-items:center;gap:6px;background:none;border:none;padding:0;cursor:pointer;font-family:'Poppins',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid-teal);margin-bottom:0;width:100%}
   .pworks-toggle:focus-visible{outline:2px solid var(--mid-teal);outline-offset:2px;border-radius:2px}
   .pworks-chevron{width:12px;height:12px;transition:transform .2s;flex-shrink:0}
@@ -102,7 +164,6 @@
   .pworks-body{overflow:hidden;max-height:0;transition:max-height .25s ease}
   .pworks-body.open{max-height:200px}
   .pworks-pills{display:flex;flex-wrap:wrap;gap:5px;padding-top:8px}
-  /* Work pill icons */
   .pwork-icon{width:12px;height:12px;flex-shrink:0;opacity:.7}
   .pwork-pill{display:inline-flex;align-items:center;gap:4px}
   .pwork-pill{font-family:'Inter',sans-serif;font-size:11px;color:var(--text-muted);background:rgba(172,196,182,.15);border:1px solid rgba(172,196,182,.3);border-radius:20px;padding:2px 9px;line-height:1.6}
@@ -117,7 +178,6 @@
     .people-grid{grid-template-columns:1fr}
     footer{padding:16px 20px}
   }
-  @media(prefers-reduced-motion:reduce){.pcard{transition:none}}
 </style>
 </head>
 <body>
@@ -182,7 +242,6 @@
     <div class="pcard" data-categories="leadership" role="listitem">
       <div class="pcard-photo">
         <img src="images/people/simon-sinek.jpg" alt="Simon Sinek">
-        <!-- PLACEHOLDER: <svg class="pcard-placeholder" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="28" r="18" fill="#5BA79F"/><path d="M4 78 Q4 52 40 52 Q76 52 76 78" fill="#5BA79F"/></svg> -->
       </div>
       <div class="pcard-body">
         <div class="pcard-top">
@@ -190,7 +249,9 @@
           <div class="ppills"><span class="ppill pp-leadership">Leadership</span></div>
           <a href="https://simonsinek.com" target="_blank" rel="noopener" aria-label="Simon Sinek website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>simonsinek.com</a>
         </div>
+        <p class="pannotation">The clearest articulation I've found of why purpose isn't a slogan — and what actually drives people to follow, stay, and contribute.</p>
         <div class="pquote">
+          <span class="pquote-mark" aria-hidden="true">&ldquo;</span>
           <div class="pquote-text">People don't buy what you do; they buy why you do it.</div>
           <div class="pquote-source">— Start With Why</div>
         </div>
@@ -199,7 +260,7 @@
           <div class="pskill-label">Related Skill</div>
           <span class="pskill-pill cs"><svg class="pskill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Leadership &amp; Social Influence <span class="pskill-cs">· coming soon</span></span>
         </div>
-<div class="pcard-divider"></div>
+        <div class="pcard-divider"></div>
         <button class="pworks-toggle" aria-expanded="false" aria-controls="works-sinek">
           Key Works <svg class="pworks-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -217,7 +278,6 @@
     <div class="pcard" data-categories="communication" role="listitem">
       <div class="pcard-photo">
         <img src="images/people/vanessa-van-edwards.jpg" alt="Vanessa Van Edwards">
-        <!-- PLACEHOLDER: <svg class="pcard-placeholder" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="28" r="18" fill="#5BA79F"/><path d="M4 78 Q4 52 40 52 Q76 52 76 78" fill="#5BA79F"/></svg> -->
       </div>
       <div class="pcard-body">
         <div class="pcard-top">
@@ -225,7 +285,9 @@
           <div class="ppills"><span class="ppill pp-communication">Communication</span></div>
           <a href="https://www.scienceofpeople.com" target="_blank" rel="noopener" aria-label="Vanessa Van Edwards website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>scienceofpeople.com</a>
         </div>
+        <p class="pannotation">The science of how people read each other — signals, cues, first impressions. Useful for anyone who works across cultures or needs to land ideas quickly.</p>
         <div class="pquote">
+          <span class="pquote-mark" aria-hidden="true">&ldquo;</span>
           <div class="pquote-text">Vulnerability is what truly elevates relationships.</div>
           <div class="pquote-source">— Captivate</div>
         </div>
@@ -234,7 +296,7 @@
           <div class="pskill-label">Related Skill</div>
           <span class="pskill-pill cs"><svg class="pskill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Empathy &amp; Active Listening <span class="pskill-cs">· coming soon</span></span>
         </div>
-<div class="pcard-divider"></div>
+        <div class="pcard-divider"></div>
         <button class="pworks-toggle" aria-expanded="false" aria-controls="works-vve">
           Key Works <svg class="pworks-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -246,12 +308,11 @@
         </div>
       </div>
     </div>
-    
+
     <!-- CHRIS VOSS -->
     <div class="pcard" data-categories="communication" role="listitem">
       <div class="pcard-photo">
         <img src="images/people/chris-voss.jpg" alt="Chris Voss">
-        <!-- PLACEHOLDER: <svg class="pcard-placeholder" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="28" r="18" fill="#5BA79F"/><path d="M4 78 Q4 52 40 52 Q76 52 76 78" fill="#5BA79F"/></svg> -->
       </div>
       <div class="pcard-body">
         <div class="pcard-top">
@@ -259,7 +320,9 @@
           <div class="ppills"><span class="ppill pp-communication">Communication</span></div>
           <a href="https://www.blackswanltd.com" target="_blank" rel="noopener" aria-label="Chris Voss website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>blackswanltd.com</a>
         </div>
+        <p class="pannotation">Negotiation reframed as listening and calibration rather than persuasion. The practical translation from hostage negotiation to everyday high-stakes conversations is surprisingly direct.</p>
         <div class="pquote">
+          <span class="pquote-mark" aria-hidden="true">&ldquo;</span>
           <div class="pquote-text">Listening is not a passive activity. It is the most active thing you can do.</div>
           <div class="pquote-source">— Never Split the Difference</div>
         </div>
@@ -268,7 +331,7 @@
           <div class="pskill-label">Related Skill</div>
           <span class="pskill-pill cs"><svg class="pskill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Empathy &amp; Active Listening <span class="pskill-cs">· coming soon</span></span>
         </div>
-<div class="pcard-divider"></div>
+        <div class="pcard-divider"></div>
         <button class="pworks-toggle" aria-expanded="false" aria-controls="works-voss">
           Key Works <svg class="pworks-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -285,7 +348,6 @@
     <div class="pcard" data-categories="psychology" role="listitem">
       <div class="pcard-photo">
         <img src="images/people/adam-grant.jpg" alt="Adam Grant">
-        <!-- PLACEHOLDER: <svg class="pcard-placeholder" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="28" r="18" fill="#5BA79F"/><path d="M4 78 Q4 52 40 52 Q76 52 76 78" fill="#5BA79F"/></svg> -->
       </div>
       <div class="pcard-body">
         <div class="pcard-top">
@@ -293,7 +355,9 @@
           <div class="ppills"><span class="ppill pp-psychology">Psychology</span></div>
           <a href="https://adamgrant.net" target="_blank" rel="noopener" aria-label="Adam Grant website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>adamgrant.net</a>
         </div>
+        <p class="pannotation">Challenges assumptions I didn't know I was carrying. Think Again is the one I return to most — it's essentially a manual for intellectual honesty.</p>
         <div class="pquote">
+          <span class="pquote-mark" aria-hidden="true">&ldquo;</span>
           <div class="pquote-text">If knowledge is power, knowing what we don't know is wisdom.</div>
           <div class="pquote-source">— Think Again</div>
         </div>
@@ -302,7 +366,7 @@
           <div class="pskill-label">Related Skill</div>
           <a href="../../skills/critical-thinking/primer.html" class="pskill-pill"><svg class="pskill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Critical Thinking</a>
         </div>
-<div class="pcard-divider"></div>
+        <div class="pcard-divider"></div>
         <button class="pworks-toggle" aria-expanded="false" aria-controls="works-grant">
           Key Works <svg class="pworks-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -320,7 +384,6 @@
     <div class="pcard" data-categories="ai" role="listitem">
       <div class="pcard-photo">
         <img src="images/people/ethan-mollick.webp" alt="Ethan Mollick">
-        <!-- PLACEHOLDER: <svg class="pcard-placeholder" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="28" r="18" fill="#5BA79F"/><path d="M4 78 Q4 52 40 52 Q76 52 76 78" fill="#5BA79F"/></svg> -->
       </div>
       <div class="pcard-body">
         <div class="pcard-top">
@@ -328,7 +391,9 @@
           <div class="ppills"><span class="ppill pp-ai">AI</span></div>
           <a href="https://www.oneusefulthing.org" target="_blank" rel="noopener" aria-label="Ethan Mollick website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>oneusefulthing.org</a>
         </div>
+        <p class="pannotation">The most rigorous empirical voice on what AI actually does to how people work. Cuts through the noise in a space that has a lot of it.</p>
         <div class="pquote">
+          <span class="pquote-mark" aria-hidden="true">&ldquo;</span>
           <div class="pquote-text">We have invented a kind of alien mind.</div>
           <div class="pquote-source">— Co-Intelligence</div>
         </div>
@@ -337,7 +402,7 @@
           <div class="pskill-label">Related Skill</div>
           <a href="../../skills/analytical-thinking/primer.html" class="pskill-pill"><svg class="pskill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Analytical Thinking</a>
         </div>
-<div class="pcard-divider"></div>
+        <div class="pcard-divider"></div>
         <button class="pworks-toggle" aria-expanded="false" aria-controls="works-mollick">
           Key Works <svg class="pworks-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -354,7 +419,6 @@
     <div class="pcard" data-categories="influence" role="listitem">
       <div class="pcard-photo">
         <img src="images/people/shade-zahrai.jpg" alt="Shade Zahrai">
-        <!-- PLACEHOLDER: <svg class="pcard-placeholder" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="28" r="18" fill="#5BA79F"/><path d="M4 78 Q4 52 40 52 Q76 52 76 78" fill="#5BA79F"/></svg> -->
       </div>
       <div class="pcard-body">
         <div class="pcard-top">
@@ -362,7 +426,9 @@
           <div class="ppills"><span class="ppill pp-influence">Influence</span></div>
           <a href="https://www.shadezahrai.com" target="_blank" rel="noopener" aria-label="Shade Zahrai website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>shadezahrai.com</a>
         </div>
+        <p class="pannotation">Authentic leadership without the corporate veneer. Her work sits at the intersection of psychology and practice in a way that feels genuinely earned.</p>
         <div class="pquote">
+          <span class="pquote-mark" aria-hidden="true">&ldquo;</span>
           <div class="pquote-text">Stepping outside your comfort zone doesn't mean you become immunized to pain.</div>
           <div class="pquote-source">— Big Trust</div>
         </div>
@@ -371,7 +437,7 @@
           <div class="pskill-label">Related Skill</div>
           <span class="pskill-pill cs"><svg class="pskill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Motivation &amp; Self-Awareness <span class="pskill-cs">· coming soon</span></span>
         </div>
-<div class="pcard-divider"></div>
+        <div class="pcard-divider"></div>
         <button class="pworks-toggle" aria-expanded="false" aria-controls="works-zahrai">
           Key Works <svg class="pworks-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -387,7 +453,6 @@
     <div class="pcard" data-categories="leadership" role="listitem">
       <div class="pcard-photo">
         <img src="images/people/brene-brown.jpg" alt="Brené Brown">
-        <!-- PLACEHOLDER: <svg class="pcard-placeholder" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="28" r="18" fill="#5BA79F"/><path d="M4 78 Q4 52 40 52 Q76 52 76 78" fill="#5BA79F"/></svg> -->
       </div>
       <div class="pcard-body">
         <div class="pcard-top">
@@ -395,7 +460,9 @@
           <div class="ppills"><span class="ppill pp-leadership">Leadership</span></div>
           <a href="https://brenebrown.com" target="_blank" rel="noopener" aria-label="Brené Brown website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>brenebrown.com</a>
         </div>
+        <p class="pannotation">Research that makes the empirical case for things most organisations still treat as soft. Vulnerability and courage aren't opposites of rigour — they're preconditions for it.</p>
         <div class="pquote">
+          <span class="pquote-mark" aria-hidden="true">&ldquo;</span>
           <div class="pquote-text">I define a leader as anyone who takes responsibility for finding the potential in people and processes.</div>
           <div class="pquote-source">— Dare to Lead</div>
         </div>
@@ -404,7 +471,7 @@
           <div class="pskill-label">Related Skill</div>
           <span class="pskill-pill cs"><svg class="pskill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Leadership &amp; Social Influence <span class="pskill-cs">· coming soon</span></span>
         </div>
-<div class="pcard-divider"></div>
+        <div class="pcard-divider"></div>
         <button class="pworks-toggle" aria-expanded="false" aria-controls="works-brown">
           Key Works <svg class="pworks-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -422,7 +489,6 @@
     <div class="pcard" data-categories="productivity" role="listitem">
       <div class="pcard-photo">
         <img src="images/people/cal-newport.jpg" alt="Cal Newport">
-        <!-- PLACEHOLDER: <svg class="pcard-placeholder" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="28" r="18" fill="#5BA79F"/><path d="M4 78 Q4 52 40 52 Q76 52 76 78" fill="#5BA79F"/></svg> -->
       </div>
       <div class="pcard-body">
         <div class="pcard-top">
@@ -430,7 +496,9 @@
           <div class="ppills"><span class="ppill pp-productivity">Productivity</span></div>
           <a href="https://calnewport.com" target="_blank" rel="noopener" aria-label="Cal Newport website" class="pext-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>calnewport.com</a>
         </div>
+        <p class="pannotation">A sustained argument for depth over busyness at a time when most productivity advice optimises for the wrong thing. His work shaped how I protect my mornings.</p>
         <div class="pquote">
+          <span class="pquote-mark" aria-hidden="true">&ldquo;</span>
           <div class="pquote-text">Who you are, what you think, feel, and do, what you love — is the sum of what you focus on.</div>
           <div class="pquote-source">— Deep Work</div>
         </div>
@@ -439,7 +507,7 @@
           <div class="pskill-label">Related Skill</div>
           <span class="pskill-pill cs"><svg class="pskill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Resilience, Flexibility &amp; Agility <span class="pskill-cs">· coming soon</span></span>
         </div>
-<div class="pcard-divider"></div>
+        <div class="pcard-divider"></div>
         <button class="pworks-toggle" aria-expanded="false" aria-controls="works-newport">
           Key Works <svg class="pworks-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -466,7 +534,6 @@
 </footer>
 
 
-
 <!-- ═══════════════════════════════════════════════════════
      NEW CARD TEMPLATE — copy, paste, and fill in to add a new person.
      Insert the new card anywhere inside .people-grid — HTML order = display order.
@@ -482,35 +549,43 @@
   <div class="pcard-body">
     <div class="pcard-top">
       <div class="pname">[Full Name]</div>
+      <div class="ppills"><span class="ppill pp-[category]">[Category]</span></div>
       <a href="[URL]" target="_blank" rel="noopener" aria-label="[Full Name] website" class="pext-link">
-        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>[domain.com]
       </a>
     </div>
-    <div class="ptagline">[Tagline — main book, series, or idea they are known for]</div>
-    <div class="ppills">
-      <span class="ppill pp-[category]">[Category]</span>
+    <p class="pannotation">[Why this person — one or two sentences in your voice. Why do you return to them specifically?]</p>
+    <div class="pquote">
+      <span class="pquote-mark" aria-hidden="true">&ldquo;</span>
+      <div class="pquote-text">[Quote text]</div>
+      <div class="pquote-source">— [Source]</div>
     </div>
     <div class="pdesc">[2–3 sentences: what they cover and what it does for how you think.]</div>
     <div class="pcard-divider"></div>
-    <div class="pworks-label">Key Works</div>
-    <div class="pworks-pills">
-      <span class="pwork-pill">[Work 1]</span>
-      <span class="pwork-pill">[Work 2]</span>
+    <button class="pworks-toggle" aria-expanded="false" aria-controls="works-[slug]">
+      Key Works <svg class="pworks-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="pworks-body" id="works-[slug]">
+      <div class="pworks-pills">
+        <a href="[goodreads-url]" target="_blank" rel="noopener" class="pwork-pill"><svg class="pwork-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>[Work 1]</a>
+        <a href="[goodreads-url]" target="_blank" rel="noopener" class="pwork-pill"><svg class="pwork-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>[Work 2]</a>
+      </div>
     </div>
   </div>
 </div>
 
      Categories — data-categories value and matching ppill class:
-       leadership      → pp-leadership
-       communication   → pp-communication
-       influence       → pp-influence
-       psychology      → pp-psychology
-       productivity    → pp-productivity
-       ai              → pp-ai
+       leadership      → pp-leadership      (terracotta left border)
+       communication   → pp-communication   (amber left border)
+       influence       → pp-influence       (terracotta left border)
+       psychology      → pp-psychology      (slate blue left border)
+       productivity    → pp-productivity    (deep teal left border)
+       ai              → pp-ai              (sage left border)
      Multiple categories: data-categories="leadership influence"
      ═══════════════════════════════════════════════════════ -->
 
 <script>
+// ── KEY WORKS TOGGLE ──
 document.querySelectorAll('.pworks-toggle').forEach(function(btn) {
   btn.addEventListener('click', function() {
     var expanded = this.getAttribute('aria-expanded') === 'true';
@@ -519,6 +594,42 @@ document.querySelectorAll('.pworks-toggle').forEach(function(btn) {
     body.classList.toggle('open', !expanded);
   });
 });
+
+// ── SCROLL-IN ANIMATION ──
+// Respects prefers-reduced-motion — cards start visible if motion is off (handled via CSS).
+(function() {
+  var cards = document.querySelectorAll('.pcard');
+  if (!cards.length) return;
+
+  // If IntersectionObserver isn't available, just show everything
+  if (!('IntersectionObserver' in window)) {
+    cards.forEach(function(c) { c.classList.add('is-visible'); });
+    return;
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var card = entry.target;
+        // Stagger based on position within the grid row
+        var siblings = Array.from(card.parentNode.children);
+        var index = siblings.indexOf(card);
+        var delay = (index % 4) * 80; // 80ms between cards in a row
+        setTimeout(function() {
+          card.classList.add('is-visible');
+        }, delay);
+        observer.unobserve(card);
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  cards.forEach(function(card) {
+    observer.observe(card);
+  });
+})();
 </script>
 </body>
 </html>
