@@ -44,8 +44,6 @@
     border-radius:var(--radius-xl);
     overflow:hidden;
     transition:border-color .2s,box-shadow .2s,transform .2s;
-    /* left border accent — default, overridden per category */
-    border-left:4px solid #ACC4B6;
     /* scroll-in animation initial state */
     opacity:0;
     transform:translateY(20px);
@@ -64,13 +62,7 @@
   .pcard:hover{border-color:rgba(45,117,111,.45);box-shadow:0 10px 30px rgba(27,74,68,.1);transform:translateY(-3px)}
   .pcard.is-visible:hover{transform:translateY(-3px)}
 
-  /* ── CATEGORY LEFT BORDER COLOURS ── */
-  .pcard[data-categories~="leadership"]  {border-left-color:#C77B5F}
-  .pcard[data-categories~="psychology"]  {border-left-color:#5B7C8F}
-  .pcard[data-categories~="communication"]{border-left-color:#D9A05B}
-  .pcard[data-categories~="influence"]   {border-left-color:#C77B5F}
-  .pcard[data-categories~="productivity"]{border-left-color:#2D756F}
-  .pcard[data-categories~="ai"]          {border-left-color:#ACC4B6}
+
 
   /* ── CATEGORY PHOTO HEADER TINTS ── */
   .pcard[data-categories~="leadership"]   .pcard-photo{background:#3D2218}
@@ -578,12 +570,12 @@
 </div>
 
      Categories — data-categories value and matching ppill class:
-       leadership      → pp-leadership      (terracotta left border)
-       communication   → pp-communication   (amber left border)
-       influence       → pp-influence       (terracotta left border)
-       psychology      → pp-psychology      (slate blue left border)
-       productivity    → pp-productivity    (deep teal left border)
-       ai              → pp-ai              (sage left border)
+       leadership      → pp-leadership
+       communication   → pp-communication
+       influence       → pp-influence
+       psychology      → pp-psychology
+       productivity    → pp-productivity
+       ai              → pp-ai
      Multiple categories: data-categories="leadership influence"
      ═══════════════════════════════════════════════════════ -->
 
