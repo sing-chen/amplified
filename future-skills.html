@@ -50,6 +50,7 @@
   .sb-source a{color:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
   .sb-source a:hover{border-bottom-color:rgba(255,255,255,.40)}
   .sb-source a:focus-visible{outline:2px solid var(--sage);outline-offset:2px;border-radius:2px}
+  .sb-dots{display:none}
 
   /* ── PAGE NAV ── */
   .page-nav{position:fixed;top:var(--site-nav-h,56px);left:0;right:0;z-index:8998;background:rgba(27,74,68,.97);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.12);box-shadow:0 2px 10px rgba(0,0,0,.28)}
@@ -280,9 +281,18 @@
     .hero,.why,.library,.chart-section{padding-left:20px;padding-right:20px}
     footer{padding-left:20px;padding-right:20px}
     .intro-inner{padding:0 20px}
-    .signal-bar{padding-left:20px;padding-right:20px}
+    .signal-bar{padding-left:0;padding-right:0;position:relative}
     .pn-inner{padding:0 20px}
-    .sb-stat{min-width:150px}
+    /* Carousel: full-width snap scroll */
+    .sb-inner{scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:40px}
+    .sb-inner::-webkit-scrollbar{display:none}
+    .sb-stat{scroll-snap-align:start;min-width:100vw;width:100vw;border-right:none;border-bottom:1px solid rgba(255,255,255,.06);padding:28px 32px 24px;box-sizing:border-box}
+    .sb-stat:last-child{border-bottom:none}
+    /* Dot indicators */
+    .sb-dots{display:flex;justify-content:center;gap:6px;padding:0 0 16px;position:absolute;bottom:0;left:0;right:0}
+    .sb-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.22);border:none;padding:0;cursor:pointer;transition:background .2s,transform .2s;flex-shrink:0}
+    .sb-dot.active{background:var(--sage);transform:scale(1.25)}
+    .sb-dot:focus-visible{outline:2px solid var(--sage);outline-offset:3px;border-radius:50%}
     .chart-inner{padding:0 20px}
     .chart-wrap{padding:20px 16px 16px}
     .chart-modal{padding:16px}
@@ -297,7 +307,7 @@
     .sbody{padding:20px 16px}
     footer{padding:16px 20px}
   }
-  @media(prefers-reduced-motion:reduce){.scard,.lcard,.stoggle,.sstatus-strip,.skill-icon,.lcc-icon,.wc,.wc-icon{transition:none}}
+  @media(prefers-reduced-motion:reduce){.scard,.lcard,.stoggle,.sstatus-strip,.skill-icon,.lcc-icon,.wc,.wc-icon,.sb-dot{transition:none}}
 </style>
 </head>
 <body>
@@ -379,7 +389,7 @@
     </div>
     <div class="sb-stat">
       <div class="sb-num">59/100</div>
-      <div class="sb-label">workers will need reskilling within five years</div>
+      <div class="sb-label">workers will need significant reskilling by 2030 — most of them already in the workforce</div>
       <div class="sb-source"><a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener noreferrer">WEF Future of Jobs 2025</a></div>
     </div>
     <div class="sb-stat">
@@ -397,6 +407,13 @@
       <div class="sb-label">of employees use AI at work — up from 30% in 2023</div>
       <div class="sb-source"><a href="https://business.udemy.com/2026-global-learning-skills-trends-report" target="_blank" rel="noopener noreferrer">Udemy Global Learning & Skills Trends 2026</a></div>
     </div>
+  </div>
+  <div class="sb-dots" aria-hidden="true">
+    <button class="sb-dot active" type="button" aria-label="Stat 1"></button>
+    <button class="sb-dot" type="button" aria-label="Stat 2"></button>
+    <button class="sb-dot" type="button" aria-label="Stat 3"></button>
+    <button class="sb-dot" type="button" aria-label="Stat 4"></button>
+    <button class="sb-dot" type="button" aria-label="Stat 5"></button>
   </div>
 </div>
 
@@ -918,6 +935,42 @@ function toggleSkill(id) {
   var header = card.querySelector('.sheader[aria-expanded]');
   if (header) header.setAttribute('aria-expanded', !isOpen);
 }
+
+// Signal bar carousel dots (mobile only)
+(function () {
+  var inner = document.querySelector('.sb-inner');
+  var dots  = document.querySelectorAll('.sb-dot');
+  if (!inner || !dots.length) return;
+
+  var stats = inner.querySelectorAll('.sb-stat');
+  var total = stats.length;
+
+  function getActiveDot() {
+    // Which stat is most visible
+    var scrollLeft = inner.scrollLeft;
+    var width = inner.offsetWidth;
+    var idx = Math.round(scrollLeft / width);
+    return Math.min(Math.max(idx, 0), total - 1);
+  }
+
+  function updateDots() {
+    var active = getActiveDot();
+    dots.forEach(function (dot, i) {
+      dot.classList.toggle('active', i === active);
+    });
+  }
+
+  inner.addEventListener('scroll', updateDots, { passive: true });
+
+  // Dot click: scroll to that stat
+  dots.forEach(function (dot, i) {
+    dot.addEventListener('click', function () {
+      inner.scrollTo({ left: i * inner.offsetWidth, behavior: 'smooth' });
+    });
+  });
+
+  updateDots();
+})();
 </script>
 </body>
 </html>
