@@ -141,6 +141,54 @@
   min-height: 18px;
 }
 
+/* ── HINT CHIPS ── */
+.search-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.search-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,.75);
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 20px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+  text-align: left;
+}
+.search-chip:hover {
+  background: rgba(255,255,255,.14);
+  border-color: rgba(172,196,182,.4);
+  color: #fff;
+}
+.search-chip:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 2px;
+  border-radius: 20px;
+}
+.search-chip svg {
+  width: 11px;
+  height: 11px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .65;
+  flex-shrink: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .search-chip { transition: none; }
+}
+
 /* ── RESULTS AREA ── */
 .search-body {
   max-width: 720px;
@@ -420,7 +468,7 @@
 <section class="search-hero" aria-label="Search">
   <div class="sh-inner">
     <p class="sh-eyebrow">Search</p>
-    <h1 class="sh-hl">Find what you're looking for</h1>
+    <h1 class="sh-hl">Search skills, thinkers,<br>and learning plans</h1>
     <div class="search-field-wrap" role="search">
       <label for="search-input" class="sr-only">Search skills, people, and pages</label>
       <span class="search-icon-left" aria-hidden="true">
@@ -433,7 +481,7 @@
         autocorrect="off"
         autocapitalize="off"
         spellcheck="false"
-        placeholder="Try "analytical thinking" or "Brené Brown"…"
+        placeholder="Try &quot;analytical thinking&quot; or &quot;Brené Brown&quot;…"
         aria-label="Search skills, people, and pages"
         aria-controls="results-list"
         aria-describedby="search-hint"
@@ -443,6 +491,20 @@
       </button>
     </div>
     <p class="search-hint" id="search-hint" aria-live="polite" aria-atomic="true"></p>
+    <div class="search-chips" aria-label="Example searches">
+      <button class="search-chip" type="button" data-query="analytical thinking">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+        analytical thinking
+      </button>
+      <button class="search-chip" type="button" data-query="Cal Newport">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+        Cal Newport
+      </button>
+      <button class="search-chip" type="button" data-query="habit builder">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+        habit builder
+      </button>
+    </div>
   </div>
 </section>
 
@@ -573,6 +635,8 @@
       if (initialQuery) {
         input.value = initialQuery;
         clearBtn.classList.add('visible');
+        var chipsElInit = document.querySelector('.search-chips');
+        if (chipsElInit) chipsElInit.style.display = 'none';
         runSearch(initialQuery);
       }
     })
@@ -832,10 +896,12 @@
   }
 
   /* ── INPUT EVENTS ───────────────────────────────────────────────────────── */
+  var chipsEl = document.querySelector('.search-chips');
   var debounceTimer;
   input.addEventListener('input', function () {
     var val = input.value;
     clearBtn.classList.toggle('visible', val.length > 0);
+    if (chipsEl) chipsEl.style.display = val.length > 0 ? 'none' : '';
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(function () {
       runSearch(val);
@@ -849,6 +915,7 @@
     resultsList.innerHTML = '';
     lastQuery = '';
     showState('initial');
+    if (chipsEl) chipsEl.style.display = '';
     window.history.replaceState(null, '', window.location.pathname);
     input.focus();
   });
@@ -859,6 +926,17 @@
       e.preventDefault();
       clearBtn.click();
     }
+  });
+
+  /* ── HINT CHIPS ─────────────────────────────────────────────────────────── */
+  document.querySelectorAll('.search-chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var q = chip.dataset.query || '';
+      input.value = q;
+      clearBtn.classList.toggle('visible', q.length > 0);
+      input.focus();
+      runSearch(q);
+    });
   });
 
 })();
