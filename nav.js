@@ -42,6 +42,7 @@
     if (/future-skills/i.test(pathname))             return 'future-skills';
     if (/my-people/i.test(pathname))                 return 'my-people';
     if (/about/i.test(pathname))                     return 'about';
+    if (/\/search/i.test(pathname))                  return 'search';
     if (/\/skills\//i.test(pathname))                return 'skill';
     return 'home';
   })();
@@ -100,6 +101,25 @@
     '}',
     '.snav-links a:hover { color: #fff; background: rgba(255,255,255,0.08); }',
     '.snav-links a.snav-active { color: #1B4A44; background: #ACC4B6; }',
+
+    /* Search icon button */
+    '.snav-search {',
+    '  display: flex;',
+    '  align-items: center; justify-content: center;',
+    '  width: 34px; height: 34px;',
+    '  background: none; border: none; border-radius: 5px;',
+    '  color: rgba(255,255,255,0.75); cursor: pointer; padding: 0;',
+    '  margin-left: 4px; flex-shrink: 0;',
+    '  text-decoration: none;',
+    '  transition: background 0.15s, color 0.15s;',
+    '}',
+    '.snav-search:hover { background: rgba(255,255,255,0.08); color: #fff; }',
+    '.snav-search.snav-search-active { color: #ACC4B6; }',
+    '.snav-search svg {',
+    '  width: 18px; height: 18px;',
+    '  stroke: currentColor; fill: none;',
+    '  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;',
+    '}',
 
     /* Mobile menu toggle (hidden on desktop) */
     '.snav-toggle {',
@@ -164,7 +184,7 @@
     '.ssb-btn.ssb-btn-active { background: #2D756F; border-color: transparent; color: #fff; }',
 
     /* Focus styles for injected nav elements */
-    '#site-nav a:focus-visible, .ssb-btn:focus-visible, .snav-toggle:focus-visible {',
+    '#site-nav a:focus-visible, .ssb-btn:focus-visible, .snav-toggle:focus-visible, .snav-search:focus-visible {',
     '  outline: 2px solid #ACC4B6;',
     '  outline-offset: 3px;',
     '  border-radius: 4px;',
@@ -218,6 +238,7 @@
     return '<li><a href="' + root(href) + '"' + cls + '>' + label + '</a></li>';
   }
 
+  var searchActiveCls = activePage === 'search' ? ' snav-search-active' : '';
   var navHTML = [
     '<nav id="site-nav" role="navigation" aria-label="Site navigation">',
     '  <a href="' + root('index.html') + '" class="snav-brand">',
@@ -227,16 +248,19 @@
     '      <span class="snav-brand-tag">Build the capability that keeps compounding.</span>',
     '    </span>',
     '  </a>',
-    '  <button type="button" id="snav-toggle" class="snav-toggle" aria-expanded="false" aria-controls="snav-links" aria-label="Open menu">',
-    '    <svg class="snav-icon-menu" viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>',
-    '    <svg class="snav-icon-close" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="6" y1="18" x2="18" y2="6"></line></svg>',
-    '  </button>',
     '  <ul class="snav-links" id="snav-links">',
     link('index.html',         'Home',          'home'),
     link('future-skills.html', 'Future Skills', 'future-skills'),
     link('my-people.html',     'My People',     'my-people'),
     link('about.html',         'About',         'about'),
     '  </ul>',
+    '  <a href="' + root('search.html') + '" class="snav-search' + searchActiveCls + '" aria-label="Search">',
+    '    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>',
+    '  </a>',
+    '  <button type="button" id="snav-toggle" class="snav-toggle" aria-expanded="false" aria-controls="snav-links" aria-label="Open menu">',
+    '    <svg class="snav-icon-menu" viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>',
+    '    <svg class="snav-icon-close" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="6" y1="18" x2="18" y2="6"></line></svg>',
+    '  </button>',
     '</nav>',
   ].join('');
 

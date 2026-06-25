@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search · Amplified</title>
+<meta name="description" content="Search the Amplified skills library — primers, learning plans, and the people behind the thinking.">
+<link rel="canonical" href="https://sing-chen.github.io/amplified/search.html">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ── SEARCH PAGE ──────────────────────────────────────────────────────────── */
+
+.search-hero {
+  background: #1B4A44;
+  padding: 64px 40px 56px;
+  position: relative;
+  overflow: hidden;
+}
+.search-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 700px 500px at 70% 60%, rgba(91,167,159,.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.sh-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.sh-eyebrow {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 14px;
+}
+.sh-hl {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  margin-bottom: 28px;
+}
+
+/* ── SEARCH INPUT ── */
+.search-field-wrap {
+  position: relative;
+}
+.search-icon-left {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  color: rgba(255,255,255,.45);
+  flex-shrink: 0;
+}
+.search-icon-left svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: block;
+}
+#search-input {
+  width: 100%;
+  padding: 16px 48px 16px 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  color: var(--white);
+  background: rgba(255,255,255,.09);
+  border: 1.5px solid rgba(255,255,255,.18);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color .15s, background .15s;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+}
+#search-input::placeholder {
+  color: rgba(255,255,255,.38);
+}
+#search-input:focus {
+  border-color: var(--sage);
+  background: rgba(255,255,255,.12);
+}
+#search-input:focus-visible {
+  outline: none; /* handled by border-color above */
+}
+.search-clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  border: none;
+  color: rgba(255,255,255,.7);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s;
+  flex-shrink: 0;
+}
+.search-clear:hover { background: rgba(255,255,255,.2); }
+.search-clear:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; }
+.search-clear svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  display: block;
+}
+.search-clear.visible { display: flex; }
+
+/* ── HINT / COUNT ── */
+.search-hint {
+  margin-top: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,.5);
+  min-height: 18px;
+}
+
+/* ── RESULTS AREA ── */
+.search-body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 40px 80px;
+}
+
+/* ── EMPTY / INITIAL STATE ── */
+.search-state {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 0 32px;
+  gap: 12px;
+}
+.search-state.visible { display: flex; }
+.search-state-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--light-sage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+.search-state-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--mid-teal);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.search-state-hl {
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+.search-state-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 380px;
+}
+
+/* ── RESULTS LIST ── */
+#results-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── RESULT CARD ── */
+.result-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--white);
+  border: 1px solid rgba(172,196,182,.25);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.result-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px -8px rgba(20,40,35,.11);
+  border-color: rgba(91,167,159,.35);
+}
+.result-card:focus-visible {
+  outline: 2px solid var(--mid-teal);
+  outline-offset: 3px;
+  border-radius: var(--radius-lg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .result-card { transition: none; }
+  .result-card:hover { transform: none; }
+}
+
+/* ── TYPE ICON ── */
+.rc-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.rc-icon svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* Icon colour variants by type */
+.rc-icon-primer   { background: #D4EAE7; }
+.rc-icon-primer   svg { stroke: #2D756F; }
+.rc-icon-plan     { background: #D8E4DD; }
+.rc-icon-plan     svg { stroke: #1F4D4A; }
+.rc-icon-person   { background: #F5E8D0; }
+.rc-icon-person   svg { stroke: #B07C35; }
+.rc-icon-page     { background: #EEF4F0; }
+.rc-icon-page     svg { stroke: #4A6878; }
+
+/* ── TEXT CONTENT ── */
+.rc-body {
+  flex: 1;
+  min-width: 0;
+}
+.rc-type-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.rc-type-primer   { color: #2D756F; }
+.rc-type-plan     { color: #1F4D4A; }
+.rc-type-person   { color: #B07C35; }
+.rc-type-page     { color: #4A6878; }
+
+.rc-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.3;
+  margin-bottom: 5px;
+}
+.rc-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── CHEVRON ── */
+.rc-arrow {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 10px;
+  color: rgba(172,196,182,.6);
+  transition: color .15s, transform .15s;
+}
+.result-card:hover .rc-arrow {
+  color: var(--mid-teal);
+  transform: translateX(2px);
+}
+.rc-arrow svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: block;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rc-arrow { transition: none; }
+  .result-card:hover .rc-arrow { transform: none; }
+}
+
+/* ── FOOTER ── */
+.search-footer {
+  background: #1B4A44;
+  border-top: 1px solid rgba(255,255,255,.07);
+  padding: 32px 40px;
+}
+.search-footer-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.footer-tagline {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sage);
+}
+.footer-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.footer-nav a {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  transition: color .15s;
+}
+.footer-nav a:hover { color: var(--white); }
+.footer-nav a:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; border-radius: 2px; }
+.footer-sep {
+  color: rgba(255,255,255,.25);
+  font-size: 13px;
+  user-select: none;
+}
+.fn {
+  max-width: 720px;
+  margin: 16px auto 0;
+  padding: 0 40px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,.35);
+  text-align: center;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .search-hero { padding: 48px 20px 40px; }
+  .search-body { padding: 28px 20px 60px; }
+  .search-footer { padding: 28px 20px; }
+  .fn { padding: 0 20px; }
+  .sh-hl { font-size: 22px; }
+  #search-input { font-size: 16px; padding: 14px 44px 14px 46px; }
+  .rc-desc { white-space: normal; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#results-region">Skip to results</a>
+
+<!-- nav.js injected here -->
+<script src="nav.js"></script>
+
+<!-- ── HERO / SEARCH INPUT ──────────────────────────────────────────────── -->
+<section class="search-hero" aria-label="Search">
+  <div class="sh-inner">
+    <p class="sh-eyebrow">Search</p>
+    <h1 class="sh-hl">Find what you're looking for</h1>
+    <div class="search-field-wrap" role="search">
+      <label for="search-input" class="sr-only">Search skills, people, and pages</label>
+      <span class="search-icon-left" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+      </span>
+      <input
+        type="search"
+        id="search-input"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        placeholder="Try "analytical thinking" or "Brené Brown"…"
+        aria-label="Search skills, people, and pages"
+        aria-controls="results-list"
+        aria-describedby="search-hint"
+      >
+      <button class="search-clear" id="search-clear" aria-label="Clear search" tabindex="0">
+        <svg viewBox="0 0 14 14"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg>
+      </button>
+    </div>
+    <p class="search-hint" id="search-hint" aria-live="polite" aria-atomic="true"></p>
+  </div>
+</section>
+
+<!-- ── RESULTS ──────────────────────────────────────────────────────────── -->
+<main class="search-body" id="results-region">
+
+  <!-- Initial prompt (shown before typing) -->
+  <div class="search-state visible" id="state-initial" aria-hidden="true">
+    <div class="search-state-icon">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+    </div>
+    <p class="search-state-hl">Search the library</p>
+    <p class="search-state-body">Skills, learning plans, people, and pages — all searchable. Start typing to explore.</p>
+  </div>
+
+  <!-- No results (shown when query returns nothing) -->
+  <div class="search-state" id="state-empty" aria-hidden="true">
+    <div class="search-state-icon">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/><line x1="11" y1="8" x2="11" y2="11"/><circle cx="11" cy="14" r=".5" fill="currentColor" stroke-width="1"/></svg>
+    </div>
+    <p class="search-state-hl">No results found</p>
+    <p class="search-state-body" id="state-empty-msg">Try different keywords, or browse the <a href="future-skills.html" style="color:var(--mid-teal);text-decoration:none;border-bottom:1px solid rgba(45,117,111,.3);">Future Skills library</a> directly.</p>
+  </div>
+
+  <!-- Results list -->
+  <ul id="results-list" role="listbox" aria-label="Search results" aria-live="polite"></ul>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer class="search-footer" role="contentinfo">
+  <div class="search-footer-inner">
+    <p class="footer-tagline">Build the capability that keeps compounding.</p>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="future-skills.html">Future Skills</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="my-people.html">My People</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="about.html">About</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="https://www.linkedin.com/in/singchen" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </nav>
+  </div>
+  <p class="fn">© <span id="yr"></span> Sing Chen</p>
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</footer>
+
+<!-- ── FUSE.JS (CDN) ── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"
+  integrity="sha512-+bVD5LKYQkCjXFkEZBDl02cBzHshSKQVdcxmB/cOLJAK0FzL0WG0URByJl7LuE3f2V5qjb4Fj5Gy6bP3H4QQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"></script>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── TYPE CONFIG ────────────────────────────────────────────────────────── */
+  var TYPE_META = {
+    primer: {
+      label: 'Skill Primer',
+      iconClass: 'rc-icon-primer',
+      labelClass: 'rc-type-primer',
+      icon: '<svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="12" y2="16"/></svg>'
+    },
+    plan: {
+      label: 'Full Learning Plan',
+      iconClass: 'rc-icon-plan',
+      labelClass: 'rc-type-plan',
+      icon: '<svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><polyline points="9 12 11 14 15 10"/></svg>'
+    },
+    person: {
+      label: 'Person',
+      iconClass: 'rc-icon-person',
+      labelClass: 'rc-type-person',
+      icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>'
+    },
+    page: {
+      label: 'Page',
+      iconClass: 'rc-icon-page',
+      labelClass: 'rc-type-page',
+      icon: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>'
+    }
+  };
+
+  /* ── DOM REFS ────────────────────────────────────────────────────────────── */
+  var input      = document.getElementById('search-input');
+  var clearBtn   = document.getElementById('search-clear');
+  var hint       = document.getElementById('search-hint');
+  var resultsList = document.getElementById('results-list');
+  var stateInit  = document.getElementById('state-initial');
+  var stateEmpty = document.getElementById('state-empty');
+
+  /* ── STATE ───────────────────────────────────────────────────────────────── */
+  var fuse = null;
+  var indexData = [];
+  var lastQuery = '';
+
+  /* ── PRE-POPULATE FROM URL PARAM ─────────────────────────────────────────── */
+  var urlParams = new URLSearchParams(window.location.search);
+  var initialQuery = urlParams.get('q') || '';
+
+  /* ── LOAD INDEX & INIT FUSE ──────────────────────────────────────────────── */
+  fetch('./search-index.json')
+    .then(function (res) {
+      if (!res.ok) throw new Error('Index fetch failed: ' + res.status);
+      return res.json();
+    })
+    .then(function (data) {
+      indexData = data;
+      fuse = new Fuse(indexData, {
+        includeScore: true,
+        minMatchCharLength: 2,
+        ignoreLocation: true,
+        threshold: 0.35,
+        distance: 200,
+        keys: [
+          { name: 'title',       weight: 0.6  },
+          { name: 'tags',        weight: 0.4  },
+          { name: 'name',        weight: 0.35 },
+          { name: 'skill',       weight: 0.3  },
+          { name: 'description', weight: 0.15 },
+          { name: 'sections',    weight: 0.1  },
+          { name: 'slides',      weight: 0.1  }
+        ]
+      });
+
+      // Run initial query if present in URL
+      if (initialQuery) {
+        input.value = initialQuery;
+        clearBtn.classList.add('visible');
+        runSearch(initialQuery);
+      }
+    })
+    .catch(function (err) {
+      hint.textContent = 'Search index unavailable — try refreshing the page.';
+      console.error('Amplified search: failed to load index', err);
+    });
+
+  /* ── SEARCH ─────────────────────────────────────────────────────────────── */
+  function runSearch(query) {
+    query = query.trim();
+    if (query === lastQuery) return;
+    lastQuery = query;
+
+    // Update URL param without pushing history
+    var newUrl = query
+      ? window.location.pathname + '?q=' + encodeURIComponent(query)
+      : window.location.pathname;
+    window.history.replaceState(null, '', newUrl);
+
+    if (!query || query.length < 2) {
+      showState('initial');
+      resultsList.innerHTML = '';
+      hint.textContent = '';
+      return;
+    }
+
+    if (!fuse) {
+      hint.textContent = 'Loading search index…';
+      return;
+    }
+
+    var results = fuse.search(query);
+    // Filter out very low confidence matches
+    results = results.filter(function (r) { return r.score < 0.6; });
+
+    renderResults(results, query);
+  }
+
+  /* ── RENDER ─────────────────────────────────────────────────────────────── */
+  function renderResults(results, query) {
+    resultsList.innerHTML = '';
+
+    if (results.length === 0) {
+      showState('empty');
+      hint.textContent = 'No results for "' + escHtml(query) + '"';
+      return;
+    }
+
+    showState('none');
+    hint.textContent = results.length === 1
+      ? '1 result'
+      : results.length + ' results';
+
+    var fragment = document.createDocumentFragment();
+    results.forEach(function (result) {
+      var item = result.item;
+      var meta = TYPE_META[item.type] || TYPE_META.page;
+      var displayTitle = item.name || item.title || '';
+      var displayDesc  = item.description || '';
+
+      var li = document.createElement('li');
+      li.setAttribute('role', 'option');
+
+      var a = document.createElement('a');
+      a.href = item.url;
+      a.className = 'result-card';
+      a.setAttribute('aria-label', meta.label + ': ' + displayTitle);
+
+      a.innerHTML =
+        '<span class="rc-icon ' + meta.iconClass + '" aria-hidden="true">' + meta.icon + '</span>' +
+        '<span class="rc-body">' +
+          '<span class="rc-type-label ' + meta.labelClass + '">' + escHtml(meta.label) + '</span>' +
+          '<span class="rc-title">' + escHtml(displayTitle) + '</span>' +
+          '<span class="rc-desc">' + escHtml(displayDesc) + '</span>' +
+        '</span>' +
+        '<span class="rc-arrow" aria-hidden="true">' +
+          '<svg viewBox="0 0 16 16"><polyline points="6 3 11 8 6 13"/></svg>' +
+        '</span>';
+
+      li.appendChild(a);
+      fragment.appendChild(li);
+    });
+
+    resultsList.appendChild(fragment);
+  }
+
+  /* ── UI STATE ────────────────────────────────────────────────────────────── */
+  function showState(which) {
+    // which: 'initial' | 'empty' | 'none'
+    stateInit.classList.toggle('visible',  which === 'initial');
+    stateEmpty.classList.toggle('visible', which === 'empty');
+    stateInit.setAttribute('aria-hidden',  which !== 'initial' ? 'true' : 'false');
+    stateEmpty.setAttribute('aria-hidden', which !== 'empty'   ? 'true' : 'false');
+  }
+
+  /* ── UTIL ─────────────────────────────────────────────────────────────── */
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  /* ── INPUT EVENTS ───────────────────────────────────────────────────────── */
+  var debounceTimer;
+  input.addEventListener('input', function () {
+    var val = input.value;
+    clearBtn.classList.toggle('visible', val.length > 0);
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function () {
+      runSearch(val);
+    }, 180);
+  });
+
+  clearBtn.addEventListener('click', function () {
+    input.value = '';
+    clearBtn.classList.remove('visible');
+    hint.textContent = '';
+    resultsList.innerHTML = '';
+    lastQuery = '';
+    showState('initial');
+    window.history.replaceState(null, '', window.location.pathname);
+    input.focus();
+  });
+
+  // Keyboard: Escape clears if input has value
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && input.value) {
+      e.preventDefault();
+      clearBtn.click();
+    }
+  });
+
+})();
+</script>
+
+<style>
+/* Screen-reader only utility (not in styles.css) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+</style>
+</body>
+</html>
