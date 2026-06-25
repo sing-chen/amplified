@@ -12,11 +12,11 @@
 <meta property="og:title" content="Future Skills Library · Amplified">
 <meta property="og:description" content="A growing library of future skills drawn from the WEF Core Skills 2030 framework. Each skill includes a short primer and a full learning plan built for deliberate practice in daily work.">
 <meta property="og:url" content="https://sing-chen.github.io/amplified/future-skills.html">
-<meta property="og:image" content="https://sing-chen.github.io/amplified/images/og-cover.png">
+<meta property="og:image" content="https://sing-chen.github.io/amplified/images/og-future-skills.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://sing-chen.github.io/amplified/images/og-cover.png">
+<meta name="twitter:image" content="https://sing-chen.github.io/amplified/images/og-future-skills.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -42,7 +42,7 @@
   .sb-stat:last-child{border-right:none}
   .sb-stat:hover{background:rgba(255,255,255,.04)}
   .sb-num{font-family:'Poppins',sans-serif;font-size:34px;font-weight:700;color:var(--sage);line-height:1;letter-spacing:-.01em;transition:font-size .2s ease,color .2s ease}
-  .sb-stat:hover .sb-num{font-size:40px;color:#C8DFCF}
+  .sb-stat:hover .sb-num{font-size:36px;color:#C8DFCF}
   .sb-label{font-family:'Inter',sans-serif;font-size:12px;line-height:1.5;color:rgba(255,255,255,.90);max-width:180px;transition:color .2s ease}
   .sb-stat:hover .sb-label{color:rgba(255,255,255,1)}
   .sb-source{font-family:'Poppins',sans-serif;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.50);margin-top:2px;transition:color .2s ease}
@@ -146,6 +146,10 @@
   .lib-hdr{margin-bottom:36px}
   .stitle{font-family:'Poppins',sans-serif;font-size:clamp(20px,2.4vw,26px);font-weight:700;color:var(--text-dark);line-height:1.2;letter-spacing:-.01em}
 
+  /* ── SKILL THUMBNAIL ── */
+  .sthumb{width:100%;border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px;display:block;flex-shrink:0}
+  .sthumb img{display:block;width:100%;height:auto;border-radius:var(--radius-lg)}
+
   /* ── SKILL CARDS ── */
   .skill-list{display:flex;flex-direction:column;gap:16px}
   .scard{background:var(--white);border:1px solid rgba(172,196,182,.25);border-radius:var(--radius-xl);overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s}
@@ -187,6 +191,7 @@
   .scard.cs .sname{color:var(--text-muted)}
   .ssum{font-family:'Inter',sans-serif;font-size:13.5px;line-height:1.55;color:var(--text-muted);max-width:400px;flex:2}
   .scard.cs .ssum{color:rgba(139,138,133,.7)}
+  .ssum em{font-style:italic}
   .sstatus{font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;padding:4px 11px;border-radius:20px;white-space:nowrap;flex-shrink:0}
   .ss-avail{background:rgba(45,117,111,.12);color:var(--mid-teal)}
   .ss-soon{background:rgba(139,138,133,.1);color:var(--warm-gray)}
@@ -252,9 +257,16 @@
   .sc-body a:hover{color:var(--deep-teal);border-bottom-color:var(--deep-teal)}
   .sc-body a:focus-visible{outline:2px solid var(--mid-teal);outline-offset:2px;border-radius:2px}
 
-  footer{background:var(--charcoal);padding:24px 40px;border-top:1px solid rgba(255,255,255,.06)}
+  footer{background:var(--charcoal);padding:32px 40px;border-top:1px solid rgba(255,255,255,.06)}
   .fi{max-width:var(--page-max);margin:0 auto}
-  .fn{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,.35)}
+  .footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  .footer-tagline{font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,.45);letter-spacing:.02em}
+  .footer-nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .footer-nav a{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s}
+  .footer-nav a:hover{color:rgba(255,255,255,.7)}
+  .footer-nav a:focus-visible{outline:2px solid var(--sage);outline-offset:3px;border-radius:2px}
+  .footer-sep{color:rgba(255,255,255,.15);user-select:none}
+  .fn{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,.25);margin-top:12px}
 
   @media(max-width:900px){
     .why-grid{grid-template-columns:1fr;gap:36px}
@@ -264,6 +276,7 @@
   }
   @media(max-width:640px){
     .hero,.why,.library,.chart-section{padding-left:20px;padding-right:20px}
+    footer{padding-left:20px;padding-right:20px}
     .intro-inner{padding:0 20px}
     .signal-bar{padding-left:20px;padding-right:20px}
     .pn-inner{padding:0 20px}
@@ -273,7 +286,9 @@
     .chart-modal{padding:16px}
     .chart-modal-close{top:12px;right:12px}
     .shc{padding:14px 16px}
-    .ssum{display:none}
+    .ssum{display:block}
+    .ssum .ssum-desc{display:none}
+    .ssum em{font-size:12px;color:var(--text-muted)}
     .sbody{padding:20px 16px}
     footer{padding:16px 20px}
   }
@@ -327,8 +342,8 @@
   </svg>
   <div class="hi">
     <p class="eyebrow">Future Skills Library</p>
-    <h1 class="hero-hl">Skills grounded in research.<br /><em>Built for real work.</em></h1>
-    <p class="hero-body">A growing library of skills drawn from the WEF Core Skills 2030 framework and corroborated by research from McKinsey, Udemy, and Microsoft. Each skill includes a primer and a full learning plan designed for deliberate practice in the flow of daily work.</p>
+    <h1 class="hero-hl">The skills that don't get<br /><em>automated away.</em></h1>
+    <p class="hero-body">Analytical reasoning, creative judgment, systems awareness, resilience. This research-grounded library is built for the capabilities that hold their value as AI handles more of the rest.</p>
   </div>
 </section>
 
@@ -539,7 +554,6 @@
       <button class="ftab" data-filter="cognitive">Cognitive</button>
       <button class="ftab" data-filter="self-efficacy">Self-Efficacy</button>
       <button class="ftab" data-filter="engagement">Engagement</button>
-      <button class="ftab" data-filter="management">Management</button>
     </div>
   </div>
   <div class="filter-empty" id="filter-empty">No skills match this filter yet.</div>
@@ -558,7 +572,7 @@
             <div class="skill-pills"><span class="skill-pill sp-cognitive">Cognitive</span></div>
             <div class="sname">Analytical Thinking</div>
           </div>
-          <div class="ssum">Break complex problems into their components before drawing conclusions. <em>"What's actually happening here?"</em></div>
+          <div class="ssum"><span class="ssum-desc">Break complex problems into their components before drawing conclusions. </span><em>"What's actually happening here?"</em></div>
           <div class="sstatus ss-avail">Available Now</div>
         </div>
         <div class="stoggle" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
@@ -573,8 +587,10 @@
           </div>
         </div>
         <div class="slaunch">
-          <div class="lcards">
-            <a href="skills/analytical-thinking/primer.html" class="lcard" aria-label="Open Analytical Thinking Primer">
+          <div class="sthumb">
+            <img src="skills/analytical-thinking/analytical-thinking-video-thumbnail.png" alt="Analytical Thinking skill thumbnail" width="504" height="284" loading="lazy">
+          </div>
+          <div class="lcards"> class="lcard" aria-label="Open Analytical Thinking Primer">
               <div class="lctype">Skill Primer</div>
               <div class="lcdesc">Short skill introduction. Core concepts, worked example, knowledge check.</div>
               <div class="lctime"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>~10 minutes</div>
@@ -603,7 +619,7 @@
             <div class="skill-pills"><span class="skill-pill sp-cognitive">Cognitive</span></div>
             <div class="sname">Creative Thinking</div>
           </div>
-          <div class="ssum">Produce original approaches by combining ideas across domains in ways that default thinking misses. <em>"What else is possible?"</em></div>
+          <div class="ssum"><span class="ssum-desc">Produce original approaches by combining ideas across domains in ways that default thinking misses. </span><em>"What else is possible?"</em></div>
           <div class="sstatus ss-soon">Coming soon</div>
         </div>
       </div>
@@ -621,7 +637,7 @@
             <div class="skill-pills"><span class="skill-pill sp-cognitive">Cognitive</span></div>
             <div class="sname">Critical Thinking</div>
           </div>
-          <div class="ssum">Evaluate arguments, identify assumptions, and resist the pull of flawed reasoning — including your own. <em>"Is this actually true?"</em></div>
+          <div class="ssum"><span class="ssum-desc">Evaluate arguments, identify assumptions, and resist the pull of flawed reasoning — including your own. </span><em>"Is this actually true?"</em></div>
           <div class="sstatus ss-avail">Available Now</div>
         </div>
         <div class="stoggle" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
@@ -636,6 +652,9 @@
           </div>
         </div>
         <div class="slaunch">
+          <div class="sthumb">
+            <img src="skills/critical-thinking/critical-thinking-video-thumbnail.png" alt="Critical Thinking skill thumbnail" width="504" height="284" loading="lazy">
+          </div>
           <div class="lcards">
             <a href="skills/critical-thinking/primer.html" class="lcard" aria-label="Open Critical Thinking Primer">
               <div class="lctype">Skill Primer</div>
@@ -666,7 +685,7 @@
             <div class="skill-pills"><span class="skill-pill sp-engagement">Engagement</span></div>
             <div class="sname">Empathy &amp; Active Listening</div>
           </div>
-          <div class="ssum">Understand what others mean — including what they don't say — and respond in ways that build trust and productive collaboration. <em>"Do I actually understand what you mean?"</em></div>
+          <div class="ssum"><span class="ssum-desc">Understand what others mean — including what they don't say — and respond in ways that build trust and productive collaboration. </span><em>"Do I actually understand what you mean?"</em></div>
           <div class="sstatus ss-soon">Coming soon</div>
         </div>
       </div>
@@ -684,7 +703,7 @@
             <div class="skill-pills"><span class="skill-pill sp-engagement">Engagement</span></div>
             <div class="sname">Leadership &amp; Social Influence</div>
           </div>
-          <div class="ssum">Build credibility, persuade across functions, and lead with integrity — regardless of formal authority. <em>"How do I bring people with me?"</em></div>
+          <div class="ssum"><span class="ssum-desc">Build credibility, persuade across functions, and lead with integrity — regardless of formal authority. </span><em>"How do I bring people with me?"</em></div>
           <div class="sstatus ss-soon">Coming soon</div>
         </div>
       </div>
@@ -702,7 +721,7 @@
             <div class="skill-pills"><span class="skill-pill sp-self-efficacy">Self-Efficacy</span></div>
             <div class="sname">Motivation &amp; Self-Awareness</div>
           </div>
-          <div class="ssum">Understand your values, triggers, and impact on others — and use that self-knowledge to show up more deliberately. <em>"Why do I do what I do?"</em></div>
+          <div class="ssum"><span class="ssum-desc">Understand your values, triggers, and impact on others — and use that self-knowledge to show up more deliberately. </span><em>"Why do I do what I do?"</em></div>
           <div class="sstatus ss-soon">Coming soon</div>
         </div>
       </div>
@@ -720,7 +739,7 @@
             <div class="skill-pills"><span class="skill-pill sp-self-efficacy">Self-Efficacy</span></div>
             <div class="sname">Resilience, Flexibility &amp; Agility</div>
           </div>
-          <div class="ssum">Recover from setbacks, adapt behaviour under pressure, and sustain productive momentum through uncertainty. <em>"How do I keep going?"</em></div>
+          <div class="ssum"><span class="ssum-desc">Recover from setbacks, adapt behaviour under pressure, and sustain productive momentum through uncertainty. </span><em>"How do I keep going?"</em></div>
           <div class="sstatus ss-soon">Coming soon</div>
         </div>
       </div>
@@ -738,7 +757,7 @@
             <div class="skill-pills"><span class="skill-pill sp-cognitive">Cognitive</span></div>
             <div class="sname">Strategic Synthesis &amp; Decision-Making</div>
           </div>
-          <div class="ssum">Connect disparate information into a coherent picture and choose a path forward under uncertainty. <em>"What does this all mean — and what do we do?"</em></div>
+          <div class="ssum"><span class="ssum-desc">Connect disparate information into a coherent picture and choose a path forward under uncertainty. </span><em>"What does this all mean — and what do we do?"</em></div>
           <div class="sstatus ss-soon">Coming soon</div>
         </div>
       </div>
@@ -756,7 +775,7 @@
             <div class="skill-pills"><span class="skill-pill sp-cognitive">Cognitive</span><span class="skill-pill sp-management">Management</span></div>
             <div class="sname">Systems Thinking</div>
           </div>
-          <div class="ssum">See interdependencies, feedback loops, and unintended consequences before they surface. <em>"What am I not seeing?"</em></div>
+          <div class="ssum"><span class="ssum-desc">See interdependencies, feedback loops, and unintended consequences before they surface. </span><em>"What am I not seeing?"</em></div>
           <div class="sstatus ss-soon">Coming soon</div>
         </div>
       </div>
@@ -770,6 +789,18 @@
 
 <footer>
   <div class="fi">
+    <div class="footer-inner">
+      <p class="footer-tagline">Build the capability that keeps compounding.</p>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="future-skills.html">Future Skills</a>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <a href="my-people.html">My People</a>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <a href="about.html">About</a>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <a href="https://www.linkedin.com/in/singchen" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </nav>
+    </div>
     <div class="fn">© <span id="yr"></span> Sing Chen</div><script>document.getElementById("yr").textContent=new Date().getFullYear()</script>
   </div>
 </footer>

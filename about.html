@@ -12,11 +12,11 @@
 <meta property="og:title" content="About · Amplified">
 <meta property="og:description" content="Amplified is where Sing Chen builds thinking in public — practical, research-grounded resources for the durable human skills that compound as AI handles more of the work.">
 <meta property="og:url" content="https://sing-chen.github.io/amplified/about.html">
-<meta property="og:image" content="https://sing-chen.github.io/amplified/images/og-cover.png">
+<meta property="og:image" content="https://sing-chen.github.io/amplified/images/og-about.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://sing-chen.github.io/amplified/images/og-cover.png">
+<meta name="twitter:image" content="https://sing-chen.github.io/amplified/images/og-about.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -74,16 +74,23 @@
   .contact-body{font-family:'Inter',sans-serif;font-size:14px;line-height:1.65;color:var(--text-muted)}
 
   /* ── FOOTER ── */
-  footer{background:var(--charcoal);padding:24px 40px;border-top:1px solid rgba(255,255,255,.06)}
+  footer{background:var(--charcoal);padding:32px 40px;border-top:1px solid rgba(255,255,255,.06)}
   .fi{max-width:1100px;margin:0 auto}
-  .fn{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,.35)}
+  .footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  .footer-tagline{font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,.45);letter-spacing:.02em}
+  .footer-nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .footer-nav a{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s}
+  .footer-nav a:hover{color:rgba(255,255,255,.7)}
+  .footer-nav a:focus-visible{outline:2px solid var(--sage);outline-offset:3px;border-radius:2px}
+  .footer-sep{color:rgba(255,255,255,.15);user-select:none}
+  .fn{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,.25);margin-top:12px}
 
   @media(max-width:640px){
     .about-page{padding:48px 20px 72px}
     .identity{flex-direction:column;gap:20px;align-items:center;text-align:center}
     .identity-quote{border-left:none;padding-left:0;border-top:2px solid var(--sage);padding-top:12px;margin-top:8px}
     .thesis{padding:22px 22px}
-    footer{padding:16px 20px}
+    footer{padding:24px 20px}
   }
 </style>
 </head>
@@ -125,6 +132,7 @@
 
     <div class="thesis">
       <p>What looks like a strategy problem is usually a conditions problem — the conditions under which people can actually think, adapt, and move.</p>
+      <p style="font-size:15px;font-weight:400;color:rgba(255,255,255,.65);margin-top:8px;">That's what the skills in this library address — not frameworks to memorise, but conditions to build.</p>
     </div>
 
     <div class="prose-divider"></div>
@@ -184,6 +192,18 @@
 
 <footer>
   <div class="fi">
+    <div class="footer-inner">
+      <p class="footer-tagline">Build the capability that keeps compounding.</p>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="future-skills.html">Future Skills</a>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <a href="my-people.html">My People</a>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <a href="about.html">About</a>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <a href="https://www.linkedin.com/in/singchen" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </nav>
+    </div>
     <div class="fn">© <span id="yr"></span> Sing Chen</div><script>document.getElementById("yr").textContent=new Date().getFullYear()</script>
   </div>
 </footer>

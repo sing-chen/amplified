@@ -75,14 +75,21 @@
   .scard-people::after{background:#3D5F70}
   .scard:hover::after{opacity:1}
 
-  footer{background:var(--charcoal);padding:24px 40px;border-top:1px solid rgba(255,255,255,.06)}
+  footer{background:var(--charcoal);padding:32px 40px;border-top:1px solid rgba(255,255,255,.06)}
   .fi{max-width:var(--page-max);margin:0 auto}
-  .fn{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,.35)}
+  .footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  .footer-tagline{font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,.45);letter-spacing:.02em}
+  .footer-nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .footer-nav a{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s}
+  .footer-nav a:hover{color:rgba(255,255,255,.7)}
+  .footer-nav a:focus-visible{outline:2px solid var(--sage);outline-offset:3px;border-radius:2px}
+  .footer-sep{color:rgba(255,255,255,.15);user-select:none}
+  .fn{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,.25);margin-top:12px}
 
   @media(max-width:700px){
     .explore-grid{grid-template-columns:1fr}
     .hero,.explore{padding-left:20px;padding-right:20px}
-    footer{padding:16px 20px}
+    footer{padding-left:20px;padding-right:20px}
   }
   @media(prefers-reduced-motion:reduce){
     .scard,.scard::after,.scard-cta svg{transition:none}
@@ -173,6 +180,18 @@
 
 <footer>
   <div class="fi">
+    <div class="footer-inner">
+      <p class="footer-tagline">Build the capability that keeps compounding.</p>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="future-skills.html">Future Skills</a>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <a href="my-people.html">My People</a>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <a href="about.html">About</a>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <a href="https://www.linkedin.com/in/singchen" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </nav>
+    </div>
     <div class="fn">© <span id="yr"></span> Sing Chen</div><script>document.getElementById("yr").textContent=new Date().getFullYear()</script>
   </div>
 </footer>
