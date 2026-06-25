@@ -554,9 +554,10 @@
         includeScore: true,
         includeMatches: true,
         minMatchCharLength: 2,
-        ignoreLocation: true,
+        ignoreLocation: false,
+        location: 0,
         threshold: 0.1,
-        distance: 200,
+        distance: 1000,
         keys: [
           { name: 'title',       weight: 0.6  },
           { name: 'tags',        weight: 0.4  },
@@ -606,7 +607,7 @@
 
     var results = fuse.search(query);
     // Filter out very low confidence matches
-    results = results.filter(function (r) { return r.score < 0.6; });
+    results = results.filter(function (r) { return r.score < 0.4; });
 
     renderResults(results, query);
   }
