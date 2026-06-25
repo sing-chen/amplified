@@ -226,6 +226,12 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+.search-state-icon.ssi-error {
+  background: #F0D9D1;
+}
+.search-state-icon.ssi-error svg {
+  stroke: #A0553F;
+}
 .search-state-hl {
   font-family: 'Poppins', sans-serif;
   font-size: 17px;
@@ -529,6 +535,15 @@
     <p class="search-state-body" id="state-empty-msg">Try different keywords, or browse the <a href="future-skills.html" style="color:var(--mid-teal);text-decoration:none;border-bottom:1px solid rgba(45,117,111,.3);">Future Skills library</a> directly.</p>
   </div>
 
+  <!-- Error (shown when index fails to load) -->
+  <div class="search-state" id="state-error" aria-hidden="true">
+    <div class="search-state-icon ssi-error">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r=".5" fill="currentColor" stroke-width="1"/></svg>
+    </div>
+    <p class="search-state-hl">Search isn't available right now</p>
+    <p class="search-state-body">The search index couldn't be loaded. Try refreshing the page, or <a href="future-skills.html" style="color:var(--mid-teal);text-decoration:none;border-bottom:1px solid rgba(45,117,111,.3);">browse the skills library</a> directly.</p>
+  </div>
+
   <!-- Results list -->
   <ul id="results-list" role="listbox" aria-label="Search results" aria-live="polite"></ul>
 
@@ -594,6 +609,7 @@
   var resultsList = document.getElementById('results-list');
   var stateInit  = document.getElementById('state-initial');
   var stateEmpty = document.getElementById('state-empty');
+  var stateError = document.getElementById('state-error');
 
   /* ── STATE ───────────────────────────────────────────────────────────────── */
   var fuse = null;
@@ -641,7 +657,12 @@
       }
     })
     .catch(function (err) {
-      hint.textContent = 'Search index unavailable — try refreshing the page.';
+      showState('error');
+      hint.textContent = '';
+      input.disabled = true;
+      input.placeholder = 'Search unavailable';
+      var chipsElErr = document.querySelector('.search-chips');
+      if (chipsElErr) chipsElErr.style.display = 'none';
       console.error('Amplified search: failed to load index', err);
     });
 
@@ -879,11 +900,13 @@
 
   /* ── UI STATE ────────────────────────────────────────────────────────────── */
   function showState(which) {
-    // which: 'initial' | 'empty' | 'none'
+    // which: 'initial' | 'empty' | 'error' | 'none'
     stateInit.classList.toggle('visible',  which === 'initial');
     stateEmpty.classList.toggle('visible', which === 'empty');
+    stateError.classList.toggle('visible', which === 'error');
     stateInit.setAttribute('aria-hidden',  which !== 'initial' ? 'true' : 'false');
     stateEmpty.setAttribute('aria-hidden', which !== 'empty'   ? 'true' : 'false');
+    stateError.setAttribute('aria-hidden', which !== 'error'   ? 'true' : 'false');
   }
 
   /* ── UTIL ─────────────────────────────────────────────────────────────── */
