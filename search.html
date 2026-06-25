@@ -303,6 +303,16 @@
 #search-input::-webkit-search-cancel-button { -webkit-appearance: none; display: none; }
 #search-input::-webkit-search-decoration    { -webkit-appearance: none; }
 
+/* ── HIGHLIGHT MARKS ── */
+.rc-title mark,
+.rc-desc mark {
+  background: rgba(91,167,159,.18);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
+  font-style: normal;
+}
+
 /* ── CHEVRON ── */
 .rc-arrow {
   flex-shrink: 0;
@@ -539,6 +549,7 @@
       indexData = data;
       fuse = new Fuse(indexData, {
         includeScore: true,
+        includeMatches: true,
         minMatchCharLength: 2,
         ignoreLocation: true,
         threshold: 0.35,
@@ -598,6 +609,62 @@
   }
 
   /* ── RENDER ─────────────────────────────────────────────────────────────── */
+
+  /*
+   * highlight(text, indices)
+   * Takes a plain string and an array of [start, end] character-index pairs
+   * from Fuse's match data and returns a safe HTML string with matched ranges
+   * wrapped in <mark> tags. Escapes all content before inserting markup.
+   *
+   * Security: text is escaped character-by-character so no raw user input
+   * or index content is ever set as innerHTML without escaping first.
+   */
+  function highlight(text, indices) {
+    if (!indices || indices.length === 0) return escHtml(text);
+
+    // Merge overlapping/adjacent ranges
+    var merged = [];
+    var sorted = indices.slice().sort(function (a, b) { return a[0] - b[0]; });
+    sorted.forEach(function (range) {
+      if (merged.length && range[0] <= merged[merged.length - 1][1] + 1) {
+        merged[merged.length - 1][1] = Math.max(merged[merged.length - 1][1], range[1]);
+      } else {
+        merged.push([range[0], range[1]]);
+      }
+    });
+
+    var result = '';
+    var cursor = 0;
+    merged.forEach(function (range) {
+      var start = range[0];
+      var end   = range[1] + 1; // Fuse end indices are inclusive
+      if (start > cursor) {
+        result += escHtml(text.slice(cursor, start));
+      }
+      result += '<mark>' + escHtml(text.slice(start, end)) + '</mark>';
+      cursor = end;
+    });
+    if (cursor < text.length) {
+      result += escHtml(text.slice(cursor));
+    }
+    return result;
+  }
+
+  /*
+   * getMatchIndices(matches, key)
+   * Extracts character index pairs from a Fuse match array for a given field key.
+   * Handles both top-level string fields and array fields (tags, sections, slides).
+   */
+  function getMatchIndices(matches, key) {
+    if (!matches) return null;
+    for (var i = 0; i < matches.length; i++) {
+      if (matches[i].key === key && matches[i].indices && matches[i].indices.length) {
+        return matches[i].indices;
+      }
+    }
+    return null;
+  }
+
   function renderResults(results, query) {
     resultsList.innerHTML = '';
 
@@ -614,10 +681,22 @@
 
     var fragment = document.createDocumentFragment();
     results.forEach(function (result) {
-      var item = result.item;
-      var meta = TYPE_META[item.type] || TYPE_META.page;
-      var displayTitle = item.name || item.title || '';
-      var displayDesc  = item.description || '';
+      var item    = result.item;
+      var matches = result.matches || [];
+      var meta    = TYPE_META[item.type] || TYPE_META.page;
+
+      var rawTitle = item.name || item.title || '';
+      var rawDesc  = item.description || '';
+
+      // Determine which field to highlight for the title row:
+      // person entries match on 'name', everything else on 'title'
+      var titleKey    = item.type === 'person' ? 'name' : 'title';
+      var titleIndices = getMatchIndices(matches, titleKey);
+      var descIndices  = getMatchIndices(matches, 'description');
+
+      var titleHtml = highlight(rawTitle, titleIndices);
+      // Only highlight description when the match actually came from that field
+      var descHtml  = descIndices ? highlight(rawDesc, descIndices) : escHtml(rawDesc);
 
       var li = document.createElement('li');
       li.setAttribute('role', 'option');
@@ -625,14 +704,14 @@
       var a = document.createElement('a');
       a.href = item.url;
       a.className = 'result-card';
-      a.setAttribute('aria-label', meta.label + ': ' + displayTitle);
+      a.setAttribute('aria-label', meta.label + ': ' + rawTitle);
 
       a.innerHTML =
         '<span class="rc-icon ' + meta.iconClass + '" aria-hidden="true">' + meta.icon + '</span>' +
         '<span class="rc-body">' +
           '<span class="rc-type-label ' + meta.labelClass + '">' + escHtml(meta.label) + '</span>' +
-          '<span class="rc-title">' + escHtml(displayTitle) + '</span>' +
-          '<span class="rc-desc">' + escHtml(displayDesc) + '</span>' +
+          '<span class="rc-title">' + titleHtml + '</span>' +
+          '<span class="rc-desc">' + descHtml + '</span>' +
         '</span>' +
         '<span class="rc-arrow" aria-hidden="true">' +
           '<svg viewBox="0 0 16 16"><polyline points="6 3 11 8 6 13"/></svg>' +
