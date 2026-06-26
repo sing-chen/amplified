@@ -1472,6 +1472,82 @@
     .principle-header, .model-header { cursor: default; }
   }
 
+  /* ── RESUME BANNER ───────────────────────────── */
+  .resume-banner {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    left: calc(var(--nav-width) + 24px);
+    right: 24px;
+    max-width: 480px;
+    background: var(--charcoal);
+    border-radius: var(--radius);
+    border-left: 3px solid var(--teal);
+    padding: 14px 16px 14px 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.22);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 200;
+    animation: bannerSlideUp 0.3s ease forwards;
+  }
+  .resume-banner.hidden {
+    display: none !important;
+  }
+  @keyframes bannerSlideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .resume-banner-text {
+    flex: 1;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.45;
+    color: rgba(255,255,255,0.75);
+  }
+  .resume-banner-text strong {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 2px;
+  }
+  .resume-banner-btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .resume-banner-btn.primary {
+    background: var(--teal);
+    color: var(--off-white);
+  }
+  .resume-banner-btn.primary:hover { background: var(--deep-teal); }
+  .resume-banner-btn.dismiss {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.5);
+    margin-left: 4px;
+  }
+  .resume-banner-btn.dismiss:hover { background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.75); }
+  .resume-banner-btn:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; }
+
+  @media (max-width: 768px) {
+    .resume-banner {
+      left: 12px;
+      right: 12px;
+      bottom: 80px;
+      max-width: none;
+    }
+  }
+
 </style>
   <style id="site-nav-overrides">
     /* Site nav offset — injected by wrapper */
@@ -1613,6 +1689,16 @@
 </nav>
 
 <!-- ── MAIN ───────────────────────────────────── -->
+<!-- ── RESUME BANNER ──────────────────────────── -->
+<div class="resume-banner hidden" id="resumeBanner" role="status" aria-live="polite">
+  <div class="resume-banner-text">
+    <strong>Welcome back</strong>
+    You were in <span id="resumeSectionLabel"></span>
+  </div>
+  <button class="resume-banner-btn primary" id="resumeBtn" type="button">Resume</button>
+  <button class="resume-banner-btn dismiss" id="resumeDismissBtn" type="button" aria-label="Dismiss, start from top">Start over</button>
+</div>
+
 <main class="main" id="main-content">
 
   <!-- HERO -->
@@ -2668,6 +2754,90 @@
 </main>
 
 <script>
+// ── STORAGE KEY ──────────────────────────────
+const STORAGE_KEY = 'amplified_plan_analytical-thinking';
+
+// ── PROGRESS PERSISTENCE ─────────────────────
+function saveProgress() {
+  try {
+    // Capture habit day open states by index
+    const habitHeaders = Array.from(document.querySelectorAll('.habit-day-header'));
+    const habitOpen = habitHeaders.map(h => h.classList.contains('open'));
+
+    // Capture quiz state
+    const quizRevealed = document.getElementById('kcScore').style.display === 'block';
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      section:      lastActiveId,
+      visited:      Array.from(visited),
+      quizSelected: kcSelected,
+      quizRevealed: quizRevealed,
+      habitOpen:    habitOpen
+    }));
+  } catch (e) {
+    // localStorage unavailable — fail silently
+  }
+}
+
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) {
+    return null;
+  }
+}
+
+function clearProgress() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (e) {}
+}
+
+function hideBanner() {
+  document.getElementById('resumeBanner').classList.add('hidden');
+}
+
+function restoreState(data) {
+  // Restore quiz selections
+  if (data.quizSelected) {
+    Object.keys(data.quizSelected).forEach(qId => {
+      const optionIdx = data.quizSelected[qId];
+      kcSelected[qId] = optionIdx;
+      const q = document.getElementById(qId);
+      if (!q) return;
+      q.querySelectorAll('.kc-option').forEach((o, i) => {
+        o.classList.toggle('selected', i === optionIdx);
+      });
+    });
+    checkAllAnswered();
+  }
+
+  // Restore revealed answers
+  if (data.quizRevealed) {
+    revealAnswers();
+  }
+
+  // Restore habit day open states
+  if (data.habitOpen) {
+    const habitHeaders = Array.from(document.querySelectorAll('.habit-day-header'));
+    data.habitOpen.forEach((isOpen, i) => {
+      if (isOpen && habitHeaders[i]) {
+        const body = habitHeaders[i].nextElementSibling;
+        habitHeaders[i].classList.add('open');
+        if (body) body.classList.add('open');
+        habitHeaders[i].setAttribute('aria-expanded', 'true');
+      }
+    });
+  }
+
+  // Restore visited sections in nav
+  if (data.visited) {
+    data.visited.forEach(s => visited.add(s));
+  }
+}
+
 // ── KNOWLEDGE CHECK ──────────────────────────
 const kcAnswers = { kc1: 2, kc2: 2, kc3: 1, kc4: 2, kc5: 2 };
 const kcSelected = {};
@@ -2680,6 +2850,7 @@ function selectOption(qId, optionIdx) {
   });
   kcSelected[qId] = optionIdx;
   checkAllAnswered();
+  saveProgress();
 }
 
 function checkAllAnswered() {
@@ -2714,6 +2885,7 @@ function revealAnswers() {
     (score === 5 ? 'solid foundation. Move to the habit builder.' :
      score >= 3 ? 'good understanding. Review the sections linked to any missed questions.' :
      'worth revisiting the first principles and mental models before moving on.');
+  saveProgress();
 }
 
 // ── HABIT ACCORDION ──────────────────────────
@@ -2723,6 +2895,7 @@ function toggleDay(btn) {
   body.classList.toggle('open', !isOpen);
   btn.classList.toggle('open', !isOpen);
   btn.setAttribute('aria-expanded', !isOpen);
+  saveProgress();
 }
 
 // ── PRINCIPLES & MODELS ACCORDION ────────────
@@ -2777,6 +2950,7 @@ function updateNav() {
     lastActiveId = activeId;
     const idx = sectionIds.indexOf(activeId);
     if (idx !== -1) currentIdx = idx;
+    saveProgress();
   }
   updateButtons();
   const pct = Math.round((visited.size / total) * 100);
@@ -2816,7 +2990,40 @@ btnPrev.addEventListener('click', function () { scrollToSection(currentIdx - 1);
 btnNext.addEventListener('click', function () { scrollToSection(currentIdx + 1); });
 
 window.addEventListener('scroll', updateNav, { passive: true });
+
+// ── Init: restore saved progress if any ─────
+const savedData = loadProgress();
+if (savedData) {
+  restoreState(savedData);
+}
 updateNav();
+
+// Show resume banner if there's a saved section beyond the first
+if (savedData && savedData.section && savedData.section !== sectionIds[0]) {
+  const resumeBanner      = document.getElementById('resumeBanner');
+  const resumeBtn         = document.getElementById('resumeBtn');
+  const resumeDismissBtn  = document.getElementById('resumeDismissBtn');
+  const resumeSectionLabel = document.getElementById('resumeSectionLabel');
+
+  // Find the display label from the nav link text
+  const savedLink = document.querySelector('.nav-link[data-section="' + savedData.section + '"]');
+  resumeSectionLabel.textContent = savedLink
+    ? savedLink.textContent.trim()
+    : savedData.section;
+
+  resumeBanner.classList.remove('hidden');
+
+  resumeBtn.addEventListener('click', function () {
+    hideBanner();
+    const idx = sectionIds.indexOf(savedData.section);
+    if (idx !== -1) scrollToSection(idx);
+  }, { once: true });
+
+  resumeDismissBtn.addEventListener('click', function () {
+    hideBanner();
+    clearProgress();
+  }, { once: true });
+}
 
 // ── Mobile "Sections" panel (rail-as-toolbar) ──────────────
 var railToggle = document.getElementById('railToggle');
